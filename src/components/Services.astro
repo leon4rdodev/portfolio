@@ -1,0 +1,132 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const services = [
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>`,
+    title: t("services.web.title"),
+    description: t("services.web.description"),
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+    title: t("services.landing.title"),
+    description: t("services.landing.description"),
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+    title: t("services.software.title"),
+    description: t("services.software.description"),
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+    title: t("services.api.title"),
+    description: t("services.api.description"),
+  },
+];
+---
+
+<section class="section services" id="services">
+  <div class="container">
+    <h2 class="section__title animate-on-scroll">{t("services.title")}</h2>
+    <p class="section__subtitle animate-on-scroll">{t("services.subtitle")}</p>
+    <div class="services__grid">
+      {
+        services.map((service) => (
+          <div class="services__card animate-on-scroll">
+            <div class="services__icon">
+              <Fragment set:html={service.icon} />
+            </div>
+            <h3 class="services__name">{service.title}</h3>
+            <p class="services__description">{service.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .services__card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl) var(--space-xl);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .services__card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .services__card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px var(--accent-glow);
+  }
+
+  .services__card:hover::before {
+    opacity: 1;
+  }
+
+  .services__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--accent-light);
+    margin-bottom: var(--space-lg);
+    transition: all var(--transition-base);
+  }
+
+  .services__card:hover .services__icon {
+    background: rgba(59, 130, 246, 0.15);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+
+  .services__name {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+  }
+
+  .services__description {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

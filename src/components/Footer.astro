@@ -1,0 +1,67 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="footer__brand">
+      leon4rdo<span class="footer__brand-accent">dev</span>
+    </p>
+    <p class="footer__copy">
+      © {year} · {t("footer.rights")}
+    </p>
+    <p class="footer__made">
+      {t("footer.made")} ♥ {t("footer.in")} 🇩🇴
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: var(--space-2xl) 0;
+  }
+
+  .footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .footer__brand {
+    font-weight: 700;
+    font-size: var(--text-sm);
+  }
+
+  .footer__brand-accent {
+    color: var(--accent);
+  }
+
+  .footer__copy {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+  }
+
+  .footer__made {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+  }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

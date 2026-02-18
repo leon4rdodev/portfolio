@@ -1,0 +1,124 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+import Icon from "./Icon.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="hero" id="hero">
+  <div class="hero__glow"></div>
+  <div class="hero__content container">
+    <p class="hero__greeting animate-on-scroll">{t("hero.greeting")}</p>
+    <h1 class="hero__name animate-on-scroll">
+      leon4rdo<span class="hero__dev">dev</span><span class="hero__dot">.</span>
+    </h1>
+    <p class="hero__headline animate-on-scroll">{t("hero.headline")}</p>
+    <p class="hero__subtitle animate-on-scroll">{t("hero.subtitle")}</p>
+    <div class="hero__actions animate-on-scroll">
+      <a href="#contact" class="btn btn--primary">
+        {t("hero.cta")}
+        <Icon name="arrow" size={16} />
+      </a>
+      <a href="#projects" class="btn btn--ghost">
+        {t("nav.projects")}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--space-4xl);
+    overflow: hidden;
+  }
+
+  .hero__glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(
+      ellipse at center,
+      var(--accent-glow) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    filter: blur(60px);
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__greeting {
+    font-size: var(--text-lg);
+    color: var(--accent-light);
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero__name {
+    font-size: var(--text-5xl);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+  }
+
+  .hero__dot {
+    color: #ffffff;
+  }
+
+  .hero__dev {
+    color: var(--accent);
+  }
+
+  .hero__headline {
+    font-size: var(--text-2xl);
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: var(--space-md);
+    max-width: 600px;
+  }
+
+  .hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-tertiary);
+    max-width: 550px;
+    line-height: 1.7;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: auto;
+      padding-top: 140px;
+      padding-bottom: var(--space-3xl);
+    }
+
+    .hero__glow {
+      width: 300px;
+      height: 200px;
+      top: 10%;
+    }
+  }
+</style>

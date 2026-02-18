@@ -1,0 +1,69 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+import ProjectCard from "./ProjectCard.astro";
+
+import bocatiImg from "../assets/projects/bocati.webp";
+import tiksnapImg from "../assets/projects/tiksnap.webp";
+import skymodsImg from "../assets/projects/skymods.webp";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const projects = [
+  {
+    name: t("project.bocati.name"),
+    description: t("project.bocati.description"),
+    tags: t("project.bocati.tags").split(","),
+    image: bocatiImg,
+    url: "https://bocati.vercel.app/",
+  },
+  {
+    name: t("project.tiksnap.name"),
+    description: t("project.tiksnap.description"),
+    tags: t("project.tiksnap.tags").split(","),
+    image: tiksnapImg,
+    url: "https://tiksnap.es/",
+  },
+  {
+    name: t("project.skymods.name"),
+    description: t("project.skymods.description"),
+    tags: t("project.skymods.tags").split(","),
+    image: skymodsImg,
+    url: "https://skymods.vercel.app/es",
+  },
+];
+---
+
+<section class="section" id="projects">
+  <div class="container">
+    <h2 class="section__title animate-on-scroll">{t("projects.title")}</h2>
+    <p class="section__subtitle animate-on-scroll">{t("projects.subtitle")}</p>
+    <div class="projects__grid">
+      {
+        projects.map((project) => (
+          <ProjectCard
+            lang={lang}
+            name={project.name}
+            description={project.description}
+            tags={project.tags}
+            image={project.image}
+            url={project.url}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+</style>
