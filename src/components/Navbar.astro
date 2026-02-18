@@ -24,9 +24,9 @@ const alternateUrl = getAlternateUrl(Astro.url);
 
     <!-- Desktop links -->
     <div class="navbar__links">
-      <a href="#projects" class="navbar__link">{t("nav.projects")}</a>
-      <a href="#services" class="navbar__link">{t("nav.services")}</a>
       <a href="#about" class="navbar__link">{t("nav.about")}</a>
+      <a href="#services" class="navbar__link">{t("nav.services")}</a>
+      <a href="#projects" class="navbar__link">{t("nav.projects")}</a>
       <a href="#contact" class="navbar__link">{t("nav.contact")}</a>
       <a href={alternateUrl} class="navbar__lang">
         {alternateLang.toUpperCase()}
@@ -47,9 +47,9 @@ const alternateUrl = getAlternateUrl(Astro.url);
   <div class="mobile-menu__backdrop" id="mobile-backdrop"></div>
   <div class="mobile-menu__content">
     <nav class="mobile-menu__nav">
-      <a href="#projects" class="mobile-menu__link">{t("nav.projects")}</a>
-      <a href="#services" class="mobile-menu__link">{t("nav.services")}</a>
       <a href="#about" class="mobile-menu__link">{t("nav.about")}</a>
+      <a href="#services" class="mobile-menu__link">{t("nav.services")}</a>
+      <a href="#projects" class="mobile-menu__link">{t("nav.projects")}</a>
       <a href="#contact" class="mobile-menu__link">{t("nav.contact")}</a>
     </nav>
     <a href={alternateUrl} class="mobile-menu__lang">
