@@ -1,43 +1,70 @@
-# Astro Starter Kit: Minimal
+# leon4rdodev — Portafolio Personal
 
-```sh
-npm create astro@latest -- --template minimal
+Portafolio web personal construido con [Astro](https://astro.build), diseñado con una estética dark premium y sistema de diseño propio.
+
+🔗 **[leon4rdodev.vercel.app](https://leon4rdodev.vercel.app)**
+
+---
+
+## ✨ Características
+
+- ⚡ Rendimiento optimizado con Astro (0 JS por defecto)
+- 🌐 Internacionalización completa (Español / English)
+- 🎨 Design system custom con dark theme + Electric Blue accent
+- 🔄 View Transitions para navegación fluida
+- 📱 Diseño responsive con menú móvil animado
+- 🔍 Lightbox para visualización de proyectos
+- 🎭 Animaciones de scroll con Intersection Observer
+- 📊 SEO optimizado con Open Graph y hreflang
+
+## 🛠️ Tech Stack
+
+| Tecnología     | Uso                                       |
+| :------------- | :---------------------------------------- |
+| **Astro**      | Framework principal                       |
+| **TypeScript** | Tipado estático                           |
+| **CSS**        | Design system vanilla (custom properties) |
+| **Inter**      | Tipografía principal                      |
+
+## 📁 Estructura
+
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
+src/
+├── components/        # Componentes Astro
+│   ├── Hero.astro
+│   ├── Projects.astro
+│   ├── ProjectCard.astro
+│   ├── Services.astro
+│   ├── About.astro
+│   ├── Contact.astro
+│   ├── Navbar.astro
+│   ├── Footer.astro
+│   ├── Lightbox.astro
+│   └── Icon.astro
+├── i18n/              # Sistema de internacionalización
+│   ├── ui.ts          # Traducciones ES/EN
+│   └── utils.ts       # Helpers de i18n
+├── layouts/
+│   └── Layout.astro   # Layout principal con SEO
+├── pages/
+│   ├── index.astro    # Redirect a /es/
+│   └── [lang]/
 │       └── index.astro
-└── package.json
+├── styles/
+│   └── global.css     # Design system completo
+└── assets/
+    └── projects/      # Imágenes de proyectos (.webp)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🚀 Comandos
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Comando           | Acción                             |
+| :---------------- | :--------------------------------- |
+| `npm install`     | Instala dependencias               |
+| `npm run dev`     | Servidor local en `localhost:4321` |
+| `npm run build`   | Build de producción en `./dist/`   |
+| `npm run preview` | Preview del build                  |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 📄 Licencia
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Todos los derechos reservados © 2026 leon4rdodev
