@@ -1,5 +1,29 @@
 ---
-// Redirect root to Spanish by default
-// Could be enhanced with browser language detection
-return Astro.redirect("/es/");
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import Projects from "../components/Projects.astro";
+import About from "../components/About.astro";
+import Services from "../components/Services.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import { defaultLang } from "../i18n/ui";
+
+const lang = defaultLang;
 ---
+
+<Layout
+  title="leon4rdodev — Desarrollo Web Fullstack"
+  description="Desarrollo web profesional con JavaScript y TypeScript. Landing pages, aplicaciones web y software de escritorio. Productos reales, listos para producción."
+  lang={lang}
+>
+  <Navbar lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Projects lang={lang} />
+    <About lang={lang} />
+    <Services lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Layout>
