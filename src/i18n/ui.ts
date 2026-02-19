@@ -28,16 +28,16 @@ export const ui = {
     'projects.visit': 'Ver sitio',
 
     'project.bocati.name': 'Bocati',
-    'project.bocati.description': 'Concepto de landing page para un SaaS de gestión gastronómica. Diseño moderno y optimizado para conversión, enfocado en cafeterías y restaurantes.',
-    'project.bocati.tags': 'Astro,TypeScript,TailwindCSS,UI/UX',
+    'project.bocati.description': 'Landing page para un SaaS de gestión para cafés y restaurantes. Incluye secciones de features, comparativa, calculadora de ROI, pricing y FAQ. Construida con Astro, sin dependencias externas.',
+    'project.bocati.tags': 'Astro,TypeScript,CSS,UI/UX',
 
     'project.tiksnap.name': 'TikSnap',
-    'project.tiksnap.description': 'Herramienta web para descargar videos de TikTok sin marca de agua. Incluye blog integrado, conversión a MP3 y cumplimiento de GDPR.',
-    'project.tiksnap.tags': 'Next.js,TypeScript,SEO,API Integration',
+    'project.tiksnap.description': 'Herramienta web para descargar videos de TikTok sin marca de agua, extraer audio en MP3 y descargar slideshows. Multiidioma (ES, EN, PT, FR), blog integrado, cumplimiento GDPR y contadores en tiempo real.',
+    'project.tiksnap.tags': 'Next.js,TypeScript,Puppeteer,i18n',
 
     'project.skymods.name': 'The Sky Mods',
-    'project.skymods.description': 'Plataforma de distribución de mods para Sky: Children of the Light. Sitio multilingüe con documentación y descargas directas.',
-    'project.skymods.tags': 'Next.js,MongoDB,i18n',
+    'project.skymods.description': 'Plataforma de distribución de mods para Sky: Children of the Light en Android. Obtiene versiones automáticamente desde GitHub, contadores de descargas en tiempo real con MongoDB y soporte para 4 idiomas (ES, EN, ID, JA).',
+    'project.skymods.tags': 'Next.js,MongoDB,GitHub API,i18n',
 
     'project.tonyranch.name': 'TonyRanch',
     'project.tonyranch.description': 'Sistema de gestión operativa para un complejo turístico. Módulos de reservas, pasadías, punto de venta, inventario e informes. PWA instalable con datos en tiempo real.',
@@ -97,16 +97,16 @@ export const ui = {
     'projects.visit': 'Visit site',
 
     'project.bocati.name': 'Bocati',
-    'project.bocati.description': 'Landing page concept for a gastronomy management SaaS. Modern, high-conversion design focused on coffee shops and restaurants.',
-    'project.bocati.tags': 'Astro,TypeScript,TailwindCSS,UI/UX',
+    'project.bocati.description': 'Landing page for a cafe and restaurant management SaaS. Includes features, comparison, ROI calculator, pricing, and FAQ sections. Built with Astro, no external dependencies.',
+    'project.bocati.tags': 'Astro,TypeScript,CSS,UI/UX',
 
     'project.tiksnap.name': 'TikSnap',
-    'project.tiksnap.description': 'Web tool for downloading TikTok videos without watermarks. Includes integrated blog, MP3 conversion, and GDPR compliance.',
-    'project.tiksnap.tags': 'Next.js,TypeScript,SEO,API Integration',
+    'project.tiksnap.description': 'Web tool to download TikTok videos without watermarks, extract audio as MP3, and download slideshows. Available in 4 languages (ES, EN, PT, FR), integrated blog, GDPR compliant, with real-time download counters.',
+    'project.tiksnap.tags': 'Next.js,TypeScript,Puppeteer,i18n',
 
     'project.skymods.name': 'The Sky Mods',
-    'project.skymods.description': 'Mod distribution platform for Sky: Children of the Light. Multilingual site with documentation and direct downloads.',
-    'project.skymods.tags': 'Next.js,MongoDB,i18n',
+    'project.skymods.description': 'Mod distribution platform for Sky: Children of the Light on Android. Automatically fetches latest releases from GitHub, real-time download counters via MongoDB, and support for 4 languages (ES, EN, ID, JA).',
+    'project.skymods.tags': 'Next.js,MongoDB,GitHub API,i18n',
 
     'project.tonyranch.name': 'TonyRanch',
     'project.tonyranch.description': 'Operational management system for a tourist complex. Modules for reservations, day passes, POS, inventory, and reports. Installable PWA with real-time data.',
