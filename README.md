@@ -53,7 +53,7 @@ src/
 ├── styles/
 │   └── global.css     # Design system completo
 └── assets/
-    └── projects/      # Imágenes de proyectos (.webp)
+    └── projects/      # Imágenes de proyectos (.png)
 ```
 
 ## 🚀 Comandos

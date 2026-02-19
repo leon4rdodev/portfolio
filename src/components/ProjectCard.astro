@@ -12,9 +12,18 @@ interface Props {
   tags: string[];
   image: ImageMetadata;
   url: string;
+  objectFit?: "cover" | "contain";
 }
 
-const { lang, name, description, tags, image, url } = Astro.props;
+const {
+  lang,
+  name,
+  description,
+  tags,
+  image,
+  url,
+  objectFit = "cover",
+} = Astro.props;
 const t = useTranslations(lang);
 ---
 
@@ -32,6 +41,7 @@ const t = useTranslations(lang);
       loading="lazy"
       widths={[400, 600, 800]}
       sizes="(max-width: 768px) 100vw, 50vw"
+      style={`object-fit: ${objectFit};`}
     />
     <span class="project-card__zoom">
       <svg
@@ -57,15 +67,19 @@ const t = useTranslations(lang);
     <div class="project-card__tags">
       {tags.map((tag) => <span class="tag">{tag}</span>)}
     </div>
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn btn--ghost btn--sm"
-    >
-      {t("projects.visit")}
-      <Icon name="external" size={14} />
-    </a>
+    {
+      url && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--ghost btn--sm"
+        >
+          {t("projects.visit")}
+          <Icon name="external" size={14} />
+        </a>
+      )
+    }
   </div>
 </article>
 

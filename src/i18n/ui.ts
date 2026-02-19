@@ -39,10 +39,14 @@ export const ui = {
     'project.skymods.description': 'Plataforma de distribución de mods para Sky: Children of the Light. Sitio multilingüe con documentación y descargas directas.',
     'project.skymods.tags': 'Next.js,MongoDB,i18n',
 
+    'project.tonyranch.name': 'TonyRanch',
+    'project.tonyranch.description': 'Sistema de gestión operativa para un complejo turístico. Módulos de reservas, pasadías, punto de venta, inventario e informes. PWA instalable con datos en tiempo real.',
+    'project.tonyranch.tags': 'Next.js,Supabase,TypeScript,PWA',
+
     // About
     'about.title': 'Sobre mí',
-    'about.p1': 'Desarrollador fullstack con base en TypeScript. Trabajo con frameworks como Next.js, Astro y NestJS para construir desde landing pages hasta sistemas completos.',
-    'about.p2': 'Me enfoco en escribir código limpio, bien estructurado y listo para producción. Cada proyecto lo trato como producto final, no como prototipo.',
+    'about.p1': 'Desarrollador fullstack con TypeScript como base. Trabajo con Next.js, Astro y NestJS para construir desde landing pages de alto rendimiento hasta sistemas web completos.',
+    'about.p2': 'Me enfoco en código limpio, bien estructurado y listo para producción. Cada proyecto lo trato como un producto final, no como un prototipo.',
     'about.stack.title': 'Stack tecnológico',
 
     // Services
@@ -104,10 +108,14 @@ export const ui = {
     'project.skymods.description': 'Mod distribution platform for Sky: Children of the Light. Multilingual site with documentation and direct downloads.',
     'project.skymods.tags': 'Next.js,MongoDB,i18n',
 
+    'project.tonyranch.name': 'TonyRanch',
+    'project.tonyranch.description': 'Operational management system for a tourist complex. Modules for reservations, day passes, POS, inventory, and reports. Installable PWA with real-time data.',
+    'project.tonyranch.tags': 'Next.js,Supabase,TypeScript,PWA',
+
     // About
     'about.title': 'About me',
-    'about.p1': "Fullstack developer with a TypeScript foundation. I work with frameworks like Next.js, Astro, and NestJS to build everything from landing pages to complete systems.",
-    'about.p2': "I focus on writing clean, well-structured, production-ready code. Every project is treated as a final product, not a prototype.",
+    'about.p1': "Fullstack developer with TypeScript as my foundation. I work with Next.js, Astro, and NestJS to build everything from high-performance landing pages to complete web systems.",
+    'about.p2': "I focus on clean, well-structured, production-ready code. Every project is treated as a final product, not a prototype.",
     'about.stack.title': 'Tech Stack',
 
     // Services

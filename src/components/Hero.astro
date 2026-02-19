@@ -30,12 +30,46 @@ const t = useTranslations(lang);
       </a>
     </div>
   </div>
+
+  <!-- Scroll indicator -->
+  <button
+    class="hero__scroll-indicator"
+    id="scroll-indicator"
+    aria-label="Scroll down"
+  >
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
 </section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indicator = document.getElementById("scroll-indicator");
+    if (indicator) {
+      indicator.addEventListener("click", () => {
+        const about = document.getElementById("about");
+        if (about) {
+          about.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    }
+  });
+</script>
 
 <style>
   .hero {
     position: relative;
-    min-height: 100dvh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     padding-top: var(--space-4xl);
@@ -108,17 +142,85 @@ const t = useTranslations(lang);
     flex-wrap: wrap;
   }
 
+  /* Scroll indicator */
+  .hero__scroll-indicator {
+    position: absolute;
+    bottom: var(--space-2xl);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    opacity: 0;
+    animation:
+      hero-fadein 0.6s ease forwards 1.2s,
+      hero-bounce 2s ease-in-out infinite 1.8s;
+    z-index: 2;
+    transition: color var(--transition-fast);
+  }
+
+  .hero__scroll-indicator:hover {
+    color: var(--accent-light);
+  }
+
+  @keyframes hero-fadein {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes hero-bounce {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(10px);
+    }
+  }
+
   @media (max-width: 768px) {
     .hero {
-      min-height: auto;
-      padding-top: 140px;
-      padding-bottom: var(--space-3xl);
+      height: 100svh;
+      min-height: 0;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      padding-top: 80px;
+      padding-bottom: var(--space-xl);
+    }
+
+    .hero__content {
+      flex: 0 0 auto;
     }
 
     .hero__glow {
       width: 300px;
       height: 200px;
       top: 10%;
+    }
+
+    .hero__scroll-indicator {
+      position: static;
+      transform: none;
+      margin: var(--space-2xl) auto 0;
+      animation:
+        hero-fadein 0.6s ease forwards 1.2s,
+        hero-bounce-mobile 2s ease-in-out infinite 1.8s;
+    }
+
+    @keyframes hero-bounce-mobile {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(10px);
+      }
     }
   }
 </style>
