@@ -32,7 +32,7 @@ export const ui = {
     'project.bocati.tags': 'Astro,TypeScript,CSS,UI/UX',
 
     'project.tiksnap.name': 'TikSnap',
-    'project.tiksnap.description': 'Herramienta web para descargar videos de TikTok sin marca de agua, extraer audio en MP3 y descargar slideshows. Blog integrado, cumplimiento GDPR y contadores de descargas en tiempo real.',
+    'project.tiksnap.description': 'Herramienta web para descargar videos de TikTok sin marca de agua y extraer audio en MP3. Blog integrado, cumplimiento GDPR y contadores de descargas en tiempo real.',
     'project.tiksnap.tags': 'Next.js,TypeScript,Puppeteer,SSR',
 
     'project.skymods.name': 'The Sky Mods',
@@ -101,7 +101,7 @@ export const ui = {
     'project.bocati.tags': 'Astro,TypeScript,CSS,UI/UX',
 
     'project.tiksnap.name': 'TikSnap',
-    'project.tiksnap.description': 'Web tool to download TikTok videos without watermarks, extract audio as MP3, and download slideshows. Integrated blog, GDPR compliant, with real-time download counters.',
+    'project.tiksnap.description': 'Web tool to download TikTok videos without watermarks and extract audio as MP3. Integrated blog, GDPR compliant, with real-time download counters.',
     'project.tiksnap.tags': 'Next.js,TypeScript,Puppeteer,SSR',
 
     'project.skymods.name': 'The Sky Mods',
