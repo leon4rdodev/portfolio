@@ -95,10 +95,21 @@
 
   function openLightbox(src: string, alt: string) {
     if (!lightbox || !lightboxImg) return;
-    lightboxImg.src = src;
+    // Hide stale image while new one loads
+    lightboxImg.style.opacity = "0";
     lightboxImg.alt = alt;
-    lightbox.classList.add("is-open");
+    lightboxImg.src = src;
     document.body.style.overflow = "hidden";
+    // Open overlay immediately (shows backdrop), reveal img only when loaded
+    lightbox.classList.add("is-open");
+    if (lightboxImg.complete) {
+      lightboxImg.style.opacity = "1";
+    } else {
+      lightboxImg.onload = () => {
+        lightboxImg.style.opacity = "1";
+        lightboxImg.onload = null;
+      };
+    }
   }
 
   function closeLightbox() {
