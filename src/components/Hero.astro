@@ -16,7 +16,10 @@ const t = useTranslations(lang);
   <div class="hero__content container">
     <p class="hero__greeting animate-on-scroll">{t("hero.greeting")}</p>
     <h1 class="hero__name animate-on-scroll">
-      leon4rdo<span class="hero__dev">dev</span><span class="hero__dot">.</span>
+      {t("hero.firstName")}
+      <span class="hero__dev">{t("hero.lastName")}</span><span class="hero__dot"
+        >.</span
+      >
     </h1>
     <p class="hero__headline animate-on-scroll">{t("hero.headline")}</p>
     <p class="hero__subtitle animate-on-scroll">{t("hero.subtitle")}</p>

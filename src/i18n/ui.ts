@@ -17,7 +17,8 @@ export const ui = {
 
     // Hero
     'hero.greeting': 'Hola, soy',
-    'hero.name': 'leon4rdodev',
+    'hero.firstName': 'Leonardo',
+    'hero.lastName': 'Victoriano',
     'hero.headline': 'Desarrollador Web Fullstack.',
     'hero.subtitle': 'Especializado en el ecosistema JavaScript/TypeScript. Experiencia construyendo aplicaciones web modernas y escalables.',
     'hero.cta': 'Contactar',
@@ -86,7 +87,8 @@ export const ui = {
 
     // Hero
     'hero.greeting': "Hi, I'm",
-    'hero.name': 'leon4rdodev',
+    'hero.firstName': 'Leonardo',
+    'hero.lastName': 'Victoriano',
     'hero.headline': 'Fullstack Web Developer.',
     'hero.subtitle': 'Specialized in the JavaScript/TypeScript ecosystem. Experienced in building modern and scalable web applications.',
     'hero.cta': "Contact",
