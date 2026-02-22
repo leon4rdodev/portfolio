@@ -2,7 +2,7 @@
 
 Portafolio web personal construido con [Astro](https://astro.build), diseñado con una estética dark premium y sistema de diseño propio.
 
-🔗 **[leon4rdodev.vercel.app](https://leon4rdodev.vercel.app)**
+🔗 **[leon4rdo.me](https://leon4rdo.me)**
 
 ---
 
