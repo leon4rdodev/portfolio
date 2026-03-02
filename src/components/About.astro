@@ -1,7 +1,6 @@
 ---
 import type { Lang } from "../i18n/ui";
 import { useTranslations } from "../i18n/utils";
-import { Icon } from "astro-icon/components";
 
 interface Props {
   lang: Lang;
@@ -10,96 +9,145 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const stack = [
-  { name: "React", icon: "simple-icons:react" },
-  { name: "Next.js", icon: "simple-icons:nextdotjs" },
-  { name: "Astro", icon: "simple-icons:astro" },
-  { name: "Node.js", icon: "simple-icons:nodedotjs" },
-  { name: "TypeScript", icon: "simple-icons:typescript" },
-  { name: "MongoDB", icon: "simple-icons:mongodb" },
-  { name: "PostgreSQL", icon: "simple-icons:postgresql" },
-  { name: "Docker", icon: "simple-icons:docker" },
-  { name: "Git", icon: "simple-icons:git" },
-  { name: "Bun", icon: "simple-icons:bun" },
-  { name: "NestJS", icon: "simple-icons:nestjs" },
+const metaItems = [
+  {
+    label: t("about.meta.location.label"),
+    value: t("about.meta.location.value"),
+  },
+  {
+    label: t("about.meta.timezone.label"),
+    value: t("about.meta.timezone.value"),
+  },
+  {
+    label: t("about.meta.languages.label"),
+    value: t("about.meta.languages.value"),
+  },
+  {
+    label: t("about.meta.availability.label"),
+    value: t("about.meta.availability.value"),
+  },
+  {
+    label: t("about.meta.github.label"),
+    value: t("about.meta.github.value"),
+    href: "https://github.com/leon4rdodev",
+  },
 ];
 ---
 
-<section class="section about" id="about">
-  <div class="container">
-    <h2 class="section__title animate-on-scroll">{t("about.title")}</h2>
-    <div class="about__content animate-on-scroll">
-      <p class="about__text">{t("about.p1")}</p>
-      <p class="about__text">{t("about.p2")}</p>
+<section class="sec" id="about">
+  <p class="sec-label">{t("about.label")}</p>
+  <h2 class="sec-title">{t("about.title")}</h2>
+  <div class="about-grid">
+    <div class="about-body animate-on-scroll">
+      <p set:html={t("about.p1")} />
+      <p set:html={t("about.p2")} />
+      <p set:html={t("about.p3")} />
     </div>
-    <div class="about__stack animate-on-scroll">
-      <p class="about__stack-title">{t("about.stack.title")}</p>
-      <div class="about__stack-list">
-        {
-          stack.map((tech) => (
-            <span class="about__tech">
-              <Icon name={tech.icon} size={16} />
-              {tech.name}
-            </span>
-          ))
-        }
-      </div>
+    <div class="about-meta animate-on-scroll">
+      {
+        metaItems.map((item) => (
+          <div class="mi">
+            <p class="mi-label">{item.label}</p>
+            <p class="mi-val">
+              {item.href ? (
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                  {item.value}
+                </a>
+              ) : (
+                item.value
+              )}
+            </p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
-  .about__content {
-    max-width: 640px;
-    margin-bottom: var(--space-2xl);
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 5rem;
+    align-items: start;
   }
 
-  .about__text {
-    font-size: var(--text-lg);
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: var(--space-md);
+  .about-body :global(p) {
+    font-size: 0.92rem;
+    line-height: 1.95;
+    color: rgba(240, 236, 227, 0.58);
+    margin-bottom: 1.5rem;
   }
 
-  .about__stack {
-    padding-top: var(--space-xl);
-    border-top: 1px solid var(--border);
+  .about-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .about-body :global(em) {
+    color: var(--white);
+    font-style: normal;
   }
 
-  .about__stack-title {
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--text-tertiary);
+  .about-meta {
+    border-left: 1px solid var(--dim);
+    padding-left: 2.5rem;
+  }
+
+  .mi {
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .mi:last-child {
+    border-bottom: none;
+  }
+
+  .mi-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: var(--space-md);
+    color: var(--accent);
+    margin-bottom: 0.45rem;
   }
 
-  .about__stack-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
+  .mi-val {
+    font-size: 0.85rem;
+    color: var(--white);
+    line-height: 1.6;
   }
 
-  .about__tech {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
-    padding: var(--space-xs) var(--space-md);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    transition: all var(--transition-fast);
+  .mi-val a {
+    color: var(--white);
+    text-decoration: none;
+    border-bottom: 1px solid var(--dim);
+    transition: border-color 0.2s;
   }
 
-  .about__tech:hover {
-    border-color: var(--border-hover);
-    color: var(--accent-light);
-    background: rgba(59, 130, 246, 0.05);
+  .mi-val a:hover {
+    border-color: var(--accent);
   }
 
-  .about__tech :global(svg) {
-    flex-shrink: 0;
+  @media (max-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .about-meta {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid var(--dim);
+      padding-top: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .mi {
+      border-right: 1px solid var(--dim);
+      padding-right: 2rem;
+    }
+    .mi:nth-child(2n) {
+      border-right: none;
+      padding-right: 0;
+      padding-left: 2rem;
+    }
   }
 </style>

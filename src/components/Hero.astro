@@ -1,7 +1,6 @@
 ---
 import type { Lang } from "../i18n/ui";
 import { useTranslations } from "../i18n/utils";
-import Icon from "./Icon.astro";
 
 interface Props {
   lang: Lang;
@@ -9,221 +8,214 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+const stackTags = [
+  "Next.js",
+  "React",
+  "Astro",
+  "NestJS",
+  "Node.js",
+  "TypeScript",
+  "PostgreSQL",
+  "MongoDB",
+  "Docker",
+  "Supabase",
+];
 ---
 
-<section class="hero" id="hero">
-  <div class="hero__glow"></div>
-  <div class="hero__content container">
-    <p class="hero__greeting animate-on-scroll">{t("hero.greeting")}</p>
-    <h1 class="hero__name animate-on-scroll">
-      {t("hero.firstName")}
-      <span class="hero__dev">{t("hero.lastName")}</span><span class="hero__dot"
-        >.</span
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow"><span class="blink"></span>{t("hero.eyebrow")}</p>
+    <h1 class="hero-name">
+      {t("hero.name.line1")}<span class="ghost">{t("hero.name.ghost1")}</span
+      ><br />{t("hero.name.line2")}<span class="ghost"
+        >{t("hero.name.ghost2")}</span
       >
     </h1>
-    <p class="hero__headline animate-on-scroll">{t("hero.headline")}</p>
-    <p class="hero__subtitle animate-on-scroll">{t("hero.subtitle")}</p>
-    <div class="hero__actions animate-on-scroll">
-      <a href="#contact" class="btn btn--primary">
-        {t("hero.cta")}
-        <Icon name="arrow" size={16} />
-      </a>
-      <a href="#projects" class="btn btn--ghost">
-        {t("nav.projects")}
-      </a>
+    <p class="hero-sub">
+      {t("hero.sub.line1")}<br />
+      <strong>{t("hero.sub.strong")}</strong><br />
+      {t("hero.sub.line3")}
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">{t("hero.cta")}</a>
+      <a href="#projects" class="btn-ghost">{t("hero.cta2")}</a>
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <button
-    class="hero__scroll-indicator"
-    id="scroll-indicator"
-    aria-label="Scroll down"
-  >
-    <svg
-      width="28"
-      height="28"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <polyline points="6 9 12 15 18 9"></polyline>
-    </svg>
-  </button>
+  <div class="hero-right">
+    <span class="hero-wm">{t("hero.wm")}</span>
+    <p class="hero-quote">
+      {t("hero.quote")}<br />
+      <mark>{t("hero.quoteMark")}</mark>
+      {t("hero.quoteEnd")}
+    </p>
+    <div class="hero-stack">
+      {stackTags.map((tag) => <span class="stag">{tag}</span>)}
+    </div>
+  </div>
 </section>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const indicator = document.getElementById("scroll-indicator");
-    if (indicator) {
-      indicator.addEventListener("click", () => {
-        const about = document.getElementById("about");
-        if (about) {
-          about.scrollIntoView({ behavior: "smooth" });
-        }
-      });
-    }
-  });
-</script>
 
 <style>
   .hero {
-    position: relative;
-    min-height: 100svh;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .hero-left {
+    padding: 11rem 3rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-right: 1px solid var(--dim);
+  }
+
+  .hero-eyebrow {
     display: flex;
     align-items: center;
-    padding-top: var(--space-4xl);
-    overflow: hidden;
+    gap: 0.75rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s 0.1s both;
   }
 
-  .hero__glow {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 400px;
-    background: radial-gradient(
-      ellipse at center,
-      var(--accent-glow) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
-    filter: blur(60px);
+  .blink {
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: blink 2.2s infinite;
   }
 
-  .hero__content {
-    position: relative;
-    z-index: 1;
+  .hero-name {
+    font-family: var(--display);
+    font-size: clamp(4.5rem, 9vw, 8.5rem);
+    line-height: 0.87;
+    letter-spacing: 0.01em;
+    animation: fadeUp 0.7s 0.2s both;
   }
 
-  .hero__greeting {
-    font-size: var(--text-lg);
-    color: var(--accent-light);
-    font-weight: 500;
-    margin-bottom: var(--space-sm);
+  .hero-sub {
+    margin-top: 2.5rem;
+    font-size: clamp(0.85rem, 1.4vw, 0.98rem);
+    line-height: 1.95;
+    color: rgba(240, 236, 227, 0.45);
+    max-width: 360px;
+    animation: fadeUp 0.6s 0.35s both;
   }
 
-  .hero__name {
-    font-size: var(--text-5xl);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: var(--space-md);
+  .hero-sub strong {
+    color: var(--white);
+    font-weight: 400;
   }
 
-  .hero__dot {
-    color: #ffffff;
-  }
-
-  .hero__dev {
-    color: var(--accent);
-  }
-
-  .hero__headline {
-    font-size: var(--text-2xl);
-    color: var(--text-secondary);
-    font-weight: 500;
-    margin-bottom: var(--space-md);
-    max-width: 600px;
-  }
-
-  .hero__subtitle {
-    font-size: var(--text-lg);
-    color: var(--text-tertiary);
-    max-width: 550px;
-    line-height: 1.7;
-    margin-bottom: var(--space-2xl);
-  }
-
-  .hero__actions {
+  .hero-cta {
+    margin-top: 3.5rem;
     display: flex;
-    gap: var(--space-md);
+    gap: 1.5rem;
+    align-items: center;
     flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.45s both;
   }
 
-  /* Scroll indicator */
-  .hero__scroll-indicator {
-    position: absolute;
-    bottom: var(--space-2xl);
-    left: 50%;
-    transform: translateX(-50%);
+  .hero-right {
+    padding: 11rem 3rem 5rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    color: var(--text-tertiary);
-    cursor: pointer;
-    opacity: 0;
-    animation:
-      hero-fadein 0.6s ease forwards 1.2s,
-      hero-bounce 2s ease-in-out infinite 1.8s;
-    z-index: 2;
-    transition: color var(--transition-fast);
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
   }
 
-  .hero__scroll-indicator:hover {
-    color: var(--accent-light);
+  .hero-wm {
+    position: absolute;
+    top: 8rem;
+    right: 2.5rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+    opacity: 0.4;
   }
 
-  @keyframes hero-fadein {
-    to {
-      opacity: 1;
-    }
+  .hero-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.1vw, 1.5rem);
+    line-height: 1.55;
+    color: rgba(240, 236, 227, 0.62);
+    animation: fadeUp 0.7s 0.3s both;
   }
 
-  @keyframes hero-bounce {
-    0%,
-    100% {
-      transform: translateX(-50%) translateY(0);
-    }
-    50% {
-      transform: translateX(-50%) translateY(10px);
-    }
+  .hero-quote mark {
+    background: none;
+    color: var(--accent);
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 0.72em;
+    letter-spacing: 0.06em;
   }
 
-  @media (max-width: 768px) {
+  .hero-stack {
+    margin-top: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem;
+    animation: fadeUp 0.6s 0.5s both;
+  }
+
+  .stag {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--dim);
+    padding: 0.28rem 0.6rem;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .stag:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ══ RESPONSIVE ══ */
+  @media (max-width: 1024px) {
     .hero {
-      height: 100svh;
-      min-height: 0;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: center;
-      padding-top: 80px;
-      padding-bottom: var(--space-xl);
+      grid-template-columns: 1fr;
     }
-
-    .hero__content {
-      flex: 0 0 auto;
+    .hero-left {
+      border-right: none;
+      border-bottom: 1px solid var(--dim);
+      padding: 9rem 2.5rem 4rem;
     }
-
-    .hero__glow {
-      width: 300px;
-      height: 200px;
-      top: 10%;
+    .hero-right {
+      padding: 3.5rem 2.5rem 4.5rem;
     }
-
-    .hero__scroll-indicator {
-      position: static;
-      transform: none;
-      margin: var(--space-2xl) auto 0;
-      animation:
-        hero-fadein 0.6s ease forwards 1.2s,
-        hero-bounce-mobile 2s ease-in-out infinite 1.8s;
+    .hero-wm {
+      display: none;
     }
+    .hero-sub {
+      max-width: 100%;
+    }
+  }
 
-    @keyframes hero-bounce-mobile {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(10px);
-      }
+  @media (max-width: 680px) {
+    .hero-left {
+      padding: 7.5rem 1.5rem 3.5rem;
+    }
+    .hero-right {
+      padding: 3rem 1.5rem 3.5rem;
+    }
+    .hero-name {
+      font-size: clamp(3.8rem, 17vw, 5.5rem);
     }
   }
 </style>

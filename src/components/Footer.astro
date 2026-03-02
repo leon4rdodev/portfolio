@@ -8,60 +8,33 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const year = new Date().getFullYear();
 ---
 
-<footer class="footer">
-  <div class="container footer__inner">
-    <p class="footer__brand">
-      leon4rdo<span class="footer__brand-accent">dev</span>
-    </p>
-    <p class="footer__copy">
-      © {year} · {t("footer.rights")}
-    </p>
-    <p class="footer__made">
-      {t("footer.made")} ♥ {t("footer.in")} 🇩🇴
-    </p>
-  </div>
+<footer>
+  <p class="foot">{t("footer.copy")}</p>
+  <p class="foot">{t("footer.made")}</p>
 </footer>
 
 <style>
-  .footer {
-    border-top: 1px solid var(--border);
-    padding: var(--space-2xl) 0;
-  }
-
-  .footer__inner {
+  footer {
+    padding: 1.8rem 3rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-md);
+    align-items: center;
   }
 
-  .footer__brand {
-    font-weight: 700;
-    font-size: var(--text-sm);
+  .foot {
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
   }
 
-  .footer__brand-accent {
-    color: var(--accent);
-  }
-
-  .footer__copy {
-    font-size: var(--text-xs);
-    color: var(--text-tertiary);
-  }
-
-  .footer__made {
-    font-size: var(--text-xs);
-    color: var(--text-tertiary);
-  }
-
-  @media (max-width: 768px) {
-    .footer__inner {
+  @media (max-width: 680px) {
+    footer {
       flex-direction: column;
+      gap: 0.5rem;
       text-align: center;
+      padding: 1.5rem;
     }
   }
 </style>

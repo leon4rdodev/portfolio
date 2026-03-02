@@ -1,0 +1,72 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const items = [
+  t("ticker.1"),
+  t("ticker.2"),
+  t("ticker.3"),
+  t("ticker.4"),
+  t("ticker.5"),
+  t("ticker.6"),
+];
+---
+
+<div class="ticker">
+  <div class="ticker-track">
+    {
+      items.map((item) => (
+        <>
+          <>
+            <span class="ti">{item}</span>
+            <span class="td"> ◆ </span>
+          </>
+        </>
+      ))
+    }
+    {
+      items.map((item) => (
+        <>
+          <>
+            <span class="ti">{item}</span>
+            <span class="td"> ◆ </span>
+          </>
+        </>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .ticker {
+    background: var(--accent);
+    overflow: hidden;
+    padding: 0.65rem 0;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .ticker-track {
+    display: inline-flex;
+    animation: scroll-x 26s linear infinite;
+  }
+
+  .ti {
+    font-family: var(--display);
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    color: var(--black);
+    padding: 0 2.5rem;
+  }
+
+  .td {
+    color: rgba(0, 0, 0, 0.22);
+  }
+</style>
