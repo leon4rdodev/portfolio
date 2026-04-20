@@ -2,6 +2,11 @@
 import type { Lang } from "../i18n/ui";
 import { useTranslations } from "../i18n/utils";
 
+import tiksnapImg from "../assets/projects/tiksnap.webp";
+import tonyranchImg from "../assets/projects/tonyranch.webp";
+import skymodsImg from "../assets/projects/skymods.webp";
+import bocatiImg from "../assets/projects/bocati.webp";
+
 interface Props {
   lang: Lang;
 }
@@ -16,6 +21,9 @@ const projects = [
     description: t("project.tiksnap.description"),
     tags: t("project.tiksnap.tags").split(","),
     url: "https://tiksnap.es/",
+    image: tiksnapImg,
+    color: "#dde8ff",
+    accent: "#2563eb",
   },
   {
     n: "002",
@@ -24,6 +32,9 @@ const projects = [
     tags: t("project.tonyranch.tags").split(","),
     url: "",
     private: true,
+    image: tonyranchImg,
+    color: "#e0f2fe",
+    accent: "#0284c7",
   },
   {
     n: "003",
@@ -31,6 +42,9 @@ const projects = [
     description: t("project.skymods.description"),
     tags: t("project.skymods.tags").split(","),
     url: "https://skymods.vercel.app/es",
+    image: skymodsImg,
+    color: "#eff6ff",
+    accent: "#3b82f6",
   },
   {
     n: "004",
@@ -38,219 +52,282 @@ const projects = [
     description: t("project.bocati.description"),
     tags: t("project.bocati.tags").split(","),
     url: "https://bocati.vercel.app/",
+    image: bocatiImg,
+    color: "#f0fdf4",
+    accent: "#16a34a",
   },
 ];
 ---
 
-<section class="sec" id="projects">
-  <p class="sec-label">{t("projects.label")}</p>
-  <h2 class="sec-title">{t("projects.title")}</h2>
-  <div class="proj-list">
-    {
-      projects.map((proj) =>
-        proj.url ? (
-          <a
-            href={proj.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="proj animate-on-scroll"
-          >
-            <span class="proj-n">{proj.n}</span>
-            <div>
-              <h3 class="proj-name">{proj.name}</h3>
-              <p class="proj-desc">{proj.description}</p>
-            </div>
-            <div class="proj-meta">
-              <div class="proj-tags">
-                {proj.tags.map((tag) => (
-                  <span class="ptag">{tag}</span>
-                ))}
+<section class="sec projects-sec" id="projects">
+  <div class="container">
+    <h2 class="sec-title">{t("projects.title")}</h2>
+    <p class="sec-sub">
+      {lang === "es"
+        ? "Productos reales, en producción, con usuarios reales."
+        : "Real products, in production, with real users."}
+    </p>
+
+    <div class="proj-grid">
+      {
+        projects.map((proj) => (
+          proj.url ? (
+            <a
+              href={proj.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="proj animate-on-scroll"
+              style={`--proj-bg:${proj.color};--proj-accent:${proj.accent}`}
+            >
+              <!-- Mockup area -->
+              <div class="proj-visual">
+                <div class="proj-mockup">
+                  <div class="mock-bar">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="mock-body">
+                    <img src={proj.image.src} alt={proj.name} loading="lazy" decoding="async" />
+                  </div>
+                </div>
               </div>
-              <span class="proj-arr">↗</span>
-            </div>
-          </a>
-        ) : (
-          <div class="proj proj-noop animate-on-scroll">
-            <span class="proj-n">{proj.n}</span>
-            <div>
-              <h3 class="proj-name">{proj.name}</h3>
-              <p class="proj-desc">{proj.description}</p>
-            </div>
-            <div class="proj-meta">
-              <div class="proj-tags">
-                {proj.tags.map((tag) => (
-                  <span class="ptag">{tag}</span>
-                ))}
+              <!-- Info -->
+              <div class="proj-info">
+                <span class="proj-n">{proj.n}</span>
+                <h3 class="proj-name">{proj.name}</h3>
+                <p class="proj-desc">{proj.description}</p>
+                <div class="proj-tags">
+                  {proj.tags.map(tag => (
+                    <span class="ptag">{tag}</span>
+                  ))}
+                </div>
               </div>
-              <span class="proj-locked">{t("projects.private")}</span>
+              <!-- Hover overlay -->
+              <div class="proj-overlay">
+                <span class="proj-visit">
+                  {lang === "es" ? "Ver proyecto ↗" : "View project ↗"}
+                </span>
+              </div>
+            </a>
+          ) : (
+            <div
+              class="proj proj-noop animate-on-scroll"
+              style={`--proj-bg:${proj.color};--proj-accent:${proj.accent}`}
+            >
+              <div class="proj-visual">
+                <div class="proj-mockup">
+                  <div class="mock-bar">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="mock-body">
+                    <img src={proj.image.src} alt={proj.name} loading="lazy" decoding="async" />
+                  </div>
+                </div>
+              </div>
+              <div class="proj-info">
+                <span class="proj-n">{proj.n}</span>
+                <h3 class="proj-name">{proj.name}</h3>
+                <p class="proj-desc">{proj.description}</p>
+                <div class="proj-tags">
+                  {proj.tags.map(tag => (
+                    <span class="ptag">{tag}</span>
+                  ))}
+                  <span class="proj-locked">{t("projects.private")}</span>
+                </div>
+              </div>
             </div>
-          </div>
-        ),
-      )
-    }
+          )
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <style>
-  .proj-list {
+  .projects-sec {
+    background: var(--bg);
+    padding-top: 7rem;
+  }
+
+  /* ── GRID ── */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+  }
+
+  /* ── CARD ── */
+  .proj {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--fg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition:
+      transform 0.28s ease,
+      box-shadow 0.28s ease,
+      border-color 0.24s;
+  }
+
+  .proj:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(37,99,235,0.12);
+    border-color: var(--blue-200);
+  }
+
+  /* Visual / Mockup area */
+  .proj-visual {
+    background: var(--proj-bg, var(--blue-50));
+    padding: 2rem 2rem 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 160px;
+  }
+
+  .proj-mockup {
+    background: var(--surface);
+    border-radius: 8px 8px 0 0;
+    border: 1.5px solid var(--border);
+    border-bottom: none;
+    width: 90%;
+    overflow: hidden;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+  }
+
+  .mock-bar {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .mock-bar span {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border2);
+    display: block;
+  }
+
+  .mock-body {
+    padding: 0;
+    display: block;
+    line-height: 0;
+  }
+
+  .mock-body img {
+    width: 100%;
+    height: auto;
+    object-position: top;
+    display: block;
+  }
+
+  /* Info area */
+  .proj-info {
+    padding: 1.75rem;
+    flex: 1;
     display: flex;
     flex-direction: column;
   }
 
-  .proj {
-    display: grid;
-    grid-template-columns: 65px 1fr auto;
-    gap: 2.5rem;
-    align-items: center;
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--dim);
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-    overflow: hidden;
-    transition: padding-left 0.3s ease;
-  }
-
-  .proj::before {
-    content: "";
-    position: absolute;
-    left: -100%;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.02);
-    transition: left 0.38s ease;
-    z-index: -1;
-  }
-
-  .proj:hover::before {
-    left: 0;
-  }
-  .proj:hover {
-    padding-left: 0.8rem;
-  }
-
   .proj-n {
-    font-size: 0.55rem;
-    letter-spacing: 0.3em;
-    color: var(--muted);
-    align-self: flex-start;
-    padding-top: 0.4rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--fg-3);
+    margin-bottom: 0.35rem;
   }
 
   .proj-name {
     font-family: var(--display);
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    letter-spacing: 0.03em;
-    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    color: var(--fg);
+    margin-bottom: 0.6rem;
     transition: color 0.2s;
   }
 
-  .proj:hover .proj-name {
-    color: var(--accent);
-  }
+  .proj:hover .proj-name { color: var(--accent); }
 
   .proj-desc {
-    font-size: 0.8rem;
-    color: var(--muted);
-    line-height: 1.78;
-    max-width: 520px;
-  }
-
-  .proj-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.8rem;
-    flex-shrink: 0;
+    font-size: 0.83rem;
+    line-height: 1.7;
+    color: var(--fg-3);
+    margin-bottom: 1.2rem;
+    flex: 1;
   }
 
   .proj-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.35rem;
-    justify-content: flex-end;
+    gap: 0.4rem;
+    align-items: center;
   }
 
   .ptag {
-    font-size: 0.55rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: 1px solid var(--dim);
-    padding: 0.22rem 0.5rem;
-    color: var(--muted);
-    transition:
-      border-color 0.2s,
-      color 0.2s;
-    white-space: nowrap;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+    padding: 0.25rem 0.65rem;
+    border-radius: 50px;
+    transition: background 0.2s;
   }
 
   .proj:hover .ptag {
-    border-color: #2e2e2e;
-    color: rgba(240, 236, 227, 0.65);
-  }
-
-  .proj-arr {
-    font-size: 1rem;
-    color: var(--muted);
-    transition:
-      color 0.2s,
-      transform 0.2s;
-  }
-
-  .proj:hover .proj-arr {
-    color: var(--accent);
-    transform: translate(3px, -3px);
+    background: var(--blue-100);
   }
 
   .proj-locked {
-    font-size: 0.52rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border: 1px solid var(--dim);
-    padding: 0.22rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--fg-3);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.65rem;
+    border-radius: 50px;
   }
 
-  .proj-noop {
-    cursor: default;
+  /* Hover overlay */
+  .proj-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(30,58,138,0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.28s;
+    border-radius: var(--radius-xl);
   }
+
+  .proj:hover .proj-overlay {
+    opacity: 1;
+  }
+
+  .proj-visit {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .proj-noop { cursor: default; }
   .proj-noop:hover {
-    padding-left: 0;
-  }
-  .proj-noop::before {
-    display: none;
-  }
-
-  /* ══ RESPONSIVE ══ */
-  @media (max-width: 1024px) {
-    .proj {
-      grid-template-columns: 55px 1fr;
-    }
-    .proj-meta {
-      display: none;
-    }
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
   }
 
-  @media (max-width: 680px) {
-    .proj {
-      grid-template-columns: 1fr;
-      padding: 2rem 0;
-      gap: 0.8rem;
-    }
-    .proj-n {
-      display: none;
-    }
-    .proj-meta {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem;
-      justify-content: flex-start;
-    }
-    .proj-locked {
-      display: none;
-    }
+  /* Responsive */
+  @media (max-width: 768px) {
+    .proj-grid { grid-template-columns: 1fr; }
   }
 </style>

@@ -5,7 +5,9 @@
     "": {
       "name": "portfolio",
       "dependencies": {
-        "@fontsource-variable/inter": "^5.2.8",
+        "@fontsource/bebas-neue": "^5.2.7",
+        "@fontsource/dm-mono": "^5.2.7",
+        "@fontsource/playfair-display": "^5.2.8",
         "@iconify-json/simple-icons": "^1.2.71",
         "@vercel/analytics": "^1.6.1",
         "astro": "^5.17.1",
@@ -92,7 +94,11 @@
 
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.27.3", "", { "os": "win32", "cpu": "x64" }, "sha512-4uJGhsxuptu3OcpVAzli+/gWusVGwZZHTlS63hh++ehExkVT8SgiEf7/uC/PclrPPkLhZqGgCTjd0VWLo6xMqA=="],
 
-    "@fontsource-variable/inter": ["@fontsource-variable/inter@5.2.8", "", {}, "sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ=="],
+    "@fontsource/bebas-neue": ["@fontsource/bebas-neue@5.2.7", "", {}, "sha512-DsmBrmq55d9BCU0mt4DT4RZDdH8vhWRKEUOfbuNB1EEjMuwbtFvM8N+3gIlkYSFbsb10P8Q19BV5OdpMu2h0fA=="],
+
+    "@fontsource/dm-mono": ["@fontsource/dm-mono@5.2.7", "", {}, "sha512-Ma1az2atTVgQWuOWwjuxx26p/6A6CU9HBNKq1CFV6YKpKhpswnf9ry9Ql4+T6bTZzkdtSfS6tjJvqZOljVzIFQ=="],
+
+    "@fontsource/playfair-display": ["@fontsource/playfair-display@5.2.8", "", {}, "sha512-fUEhib70SszNhQVsGbUMSsWJhr7Je0rdeuZdtGpDNu0GKF1xJM8QhpI/y0pckU25GcChXm9TLOmeZupkvvZo2g=="],
 
     "@iconify-json/simple-icons": ["@iconify-json/simple-icons@1.2.71", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-rNoDFbq1fAYiEexBvrw613/xiUOPEu5MKVV/X8lI64AgdTzLQUUemr9f9fplxUMPoxCBP2rWzlhOEeTHk/Sf0Q=="],
 

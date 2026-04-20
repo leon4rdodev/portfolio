@@ -10,12 +10,8 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const items = [
-  t("ticker.1"),
-  t("ticker.2"),
-  t("ticker.3"),
-  t("ticker.4"),
-  t("ticker.5"),
-  t("ticker.6"),
+  t("ticker.1"), t("ticker.2"), t("ticker.3"),
+  t("ticker.4"), t("ticker.5"), t("ticker.6"),
 ];
 ---
 
@@ -24,20 +20,16 @@ const items = [
     {
       items.map((item) => (
         <>
-          <>
-            <span class="ti">{item}</span>
-            <span class="td"> ◆ </span>
-          </>
+          <span class="ti">{item}</span>
+          <span class="td">✦</span>
         </>
       ))
     }
     {
       items.map((item) => (
         <>
-          <>
-            <span class="ti">{item}</span>
-            <span class="td"> ◆ </span>
-          </>
+          <span class="ti">{item}</span>
+          <span class="td">✦</span>
         </>
       ))
     }
@@ -46,27 +38,30 @@ const items = [
 
 <style>
   .ticker {
-    background: var(--accent);
+    background: var(--fg);
     overflow: hidden;
-    padding: 0.65rem 0;
+    padding: 0.75rem 0;
     white-space: nowrap;
     user-select: none;
   }
 
   .ticker-track {
     display: inline-flex;
-    animation: scroll-x 26s linear infinite;
+    align-items: center;
+    animation: scroll-x 30s linear infinite;
   }
 
   .ti {
     font-family: var(--display);
-    font-size: 0.8rem;
-    letter-spacing: 0.18em;
-    color: var(--black);
-    padding: 0 2.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    color: rgba(255,255,255,0.65);
+    padding: 0 2rem;
   }
 
   .td {
-    color: rgba(0, 0, 0, 0.22);
+    color: var(--blue-400);
+    font-size: 0.5rem;
+    flex-shrink: 0;
   }
 </style>

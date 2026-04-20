@@ -11,29 +11,54 @@ const t = useTranslations(lang);
 ---
 
 <footer>
-  <p class="foot">{t("footer.copy")}</p>
-  <p class="foot">{t("footer.made")}</p>
+  <div class="footer-inner container">
+    <a href="/" class="foot-logo" style="text-transform:lowercase"><span class="br">&lt;</span>leon<span class="n4">4</span>rdo<span class="br">/&gt;</span></a>
+    <p class="foot-copy">{t("footer.copy")}</p>
+    <p class="foot-made">{t("footer.made")}</p>
+  </div>
 </footer>
 
 <style>
   footer {
-    padding: 1.8rem 3rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 2.2rem 2rem;
+  }
+
+  .footer-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1.5rem;
   }
 
-  .foot {
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    color: var(--muted);
+  .foot-logo {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    letter-spacing: 0.28em;
+    color: var(--fg-3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .foot-logo:hover { color: var(--accent) !important; }
+
+  .foot-logo .n4 { color: var(--accent); }
+  .foot-logo .br { color: var(--border2); }
+
+  .foot-copy,
+  .foot-made {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--fg-3);
   }
 
   @media (max-width: 680px) {
-    footer {
+    .footer-inner {
       flex-direction: column;
-      gap: 0.5rem;
       text-align: center;
+      gap: 0.6rem;
       padding: 1.5rem;
     }
   }

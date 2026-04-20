@@ -1,6 +1,7 @@
 ---
 import type { Lang } from "../i18n/ui";
 import { useTranslations } from "../i18n/utils";
+import userAvatar from "../assets/icon/leon4rdo.webp";
 
 interface Props {
   lang: Lang;
@@ -10,212 +11,340 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const stackTags = [
-  "Next.js",
-  "React",
-  "Astro",
-  "NestJS",
-  "Node.js",
-  "TypeScript",
-  "PostgreSQL",
-  "MongoDB",
-  "Docker",
-  "Supabase",
+  "Next.js", "React", "Astro", "NestJS",
+  "Node.js", "TypeScript", "PostgreSQL",
+  "MongoDB", "Docker", "Supabase",
 ];
 ---
 
-<section class="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow"><span class="blink"></span>{t("hero.eyebrow")}</p>
-    <h1 class="hero-name">
-      {t("hero.name.line1")}<span class="ghost">{t("hero.name.ghost1")}</span
-      ><br />{t("hero.name.line2")}<span class="ghost"
-        >{t("hero.name.ghost2")}</span
-      >
-    </h1>
-    <p class="hero-sub">
-      {t("hero.sub.line1")}<br />
-      <strong>{t("hero.sub.strong")}</strong><br />
-      {t("hero.sub.line3")}
-    </p>
-    <div class="hero-cta">
-      <a href="#contact" class="btn-primary">{t("hero.cta")}</a>
-      <a href="#projects" class="btn-ghost">{t("hero.cta2")}</a>
+<section class="hero-outer">
+  <!-- Shapes background -->
+  <div class="bg-shapes" aria-hidden="true">
+    <span class="shape s1">&lt;/&gt;</span>
+    <span class="shape s2">{ }</span>
+    <span class="shape s3">( )</span>
+    <span class="shape s4">[ ]</span>
+    <span class="shape s5">&lt;/&gt;</span>
+    <span class="shape s6">&lt;/&gt;</span>
+  </div>
+
+  <div class="hero-inner">
+
+    <div class="hero-content">
+      <!-- Premium Role Badge -->
+      <div class="hero-role-badge">
+        <span class="badge-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        </span>
+        {t("hero.role")}
+      </div>
+
+      <!-- Tagline — THE hero statement -->
+      <h1 class="hero-tagline">{t("hero.tagline")}</h1>
+
+      <!-- Short bio -->
+      <p class="hero-bio">{t("hero.bio")}</p>
+
+      <!-- Stack tags -->
+      <div class="hero-tags">
+        {stackTags.map(tag => <span class="htag">{tag}</span>)}
+      </div>
+
+      <!-- CTAs -->
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">{t("hero.cta")}</a>
+        <a href="#projects" class="btn-outline-white">{t("hero.cta2")}</a>
+      </div>
+
+      <!-- Availability note -->
+      <p class="hero-avail-note">{t("hero.eyebrow")}</p>
+    </div>
+
+    <!-- Avatar -->
+    <div class="hero-image">
+      <div class="avatar-ring">
+        <img
+          src={userAvatar.src}
+          alt="Leonardo Victoriano — Fullstack Developer"
+          width="400"
+          height="400"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
     </div>
   </div>
 
-  <div class="hero-right">
-    <span class="hero-wm">{t("hero.wm")}</span>
-    <p class="hero-quote">
-      {t("hero.quote")}<br />
-      <mark>{t("hero.quoteMark")}</mark>
-      {t("hero.quoteEnd")}
-    </p>
-    <div class="hero-stack">
-      {stackTags.map((tag) => <span class="stag">{tag}</span>)}
-    </div>
+  <!-- Wave Divider -->
+  <div class="hero-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path fill="currentColor" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+    </svg>
   </div>
 </section>
 
 <style>
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 55% 45%;
-    border-bottom: 1px solid var(--dim);
+  /* ── BLUE HERO ── */
+  .hero-outer {
+    background: linear-gradient(150deg, var(--blue-700) 0%, var(--blue-600) 55%, var(--blue-500) 100%);
+    padding: 10rem 2rem 14rem;
+    position: relative;
+    overflow: hidden;
   }
 
-  .hero-left {
-    padding: 11rem 3rem 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    border-right: 1px solid var(--dim);
+  /* ── BG SHAPES ── */
+  .bg-shapes {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
   }
 
-  .hero-eyebrow {
+  .bg-shapes .shape {
+    position: absolute;
+    font-family: var(--mono, monospace);
+    font-weight: 800;
+    line-height: 1;
+    color: #ffffff;
+    opacity: 0.04;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .s1 { font-size: 18rem; top: 8%; right: -2%; transform: rotate(15deg); opacity: 0.06; }
+  .s2 { font-size: 14rem; bottom: 12%; left: -2%; transform: rotate(-25deg); opacity: 0.08; }
+  .s3 { font-size: 10rem; top: 40%; left: 48%; transform: rotate(-10deg); opacity: 0.04; }
+  .s4 { font-size: 12rem; top: 10%; left: 12%; transform: rotate(35deg); opacity: 0.05; }
+  .s5 { font-size: 24rem; bottom: -2%; right: -2%; transform: rotate(-15deg); opacity: 0.05; }
+  .s6 { font-size: 16rem; bottom: 18%; left: 8%; transform: rotate(20deg); opacity: 0.04; }
+
+  /* ── WAVE DIVIDER ── */
+  .hero-wave {
+    position: absolute;
+    bottom: -1px; /* Prevents 1px gap bug in some screens */
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hero-wave svg {
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 80px;
+    color: var(--bg);
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 0.68rem;
-    letter-spacing: 0.3em;
+    gap: 4rem;
+  }
+
+  /* ── TEXT CONTENT ── */
+  .hero-content {
+    flex: 1;
+    text-align: left;
+  }
+
+  /* ── AVATAR IMAGE ── */
+  .hero-image {
+    flex-shrink: 0;
+    animation: fadeUp 0.6s 0.2s both;
+  }
+
+  /* ── PREMIUM ROLE BADGE ── */
+  .hero-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--blue-700);
+    background: #ffffff;
+    padding: 0.45rem 1.1rem;
+    border-radius: 50px;
     margin-bottom: 2rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
     animation: fadeUp 0.6s 0.1s both;
   }
 
-  .blink {
-    width: 7px;
-    height: 7px;
-    background: var(--accent);
-    border-radius: 50%;
-    flex-shrink: 0;
-    animation: blink 2.2s infinite;
+  .badge-icon {
+    display: flex;
+    align-items: center;
+    color: var(--accent);
+  }
+  
+  .badge-icon svg {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2.5;
   }
 
-  .hero-name {
-    font-family: var(--display);
-    font-size: clamp(4.5rem, 9vw, 8.5rem);
-    line-height: 0.87;
-    letter-spacing: 0.01em;
+  /* ── TAGLINE — main heading ── */
+  .hero-tagline {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    max-width: 620px;
+    margin-bottom: 1.5rem;
     animation: fadeUp 0.7s 0.2s both;
   }
 
-  .hero-sub {
-    margin-top: 2.5rem;
-    font-size: clamp(0.85rem, 1.4vw, 0.98rem);
-    line-height: 1.95;
-    color: rgba(240, 236, 227, 0.45);
-    max-width: 360px;
-    animation: fadeUp 0.6s 0.35s both;
+  /* ── BIO ── */
+  .hero-bio {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    line-height: 1.75;
+    color: rgba(255,255,255,0.8);
+    max-width: 600px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s 0.3s both;
   }
 
-  .hero-sub strong {
-    color: var(--white);
-    font-weight: 400;
+  /* ── STACK TAGS ── */
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    animation: fadeUp 0.6s 0.4s both;
   }
 
+  .htag {
+    font-size: 0.67rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.35rem 0.8rem;
+    border-radius: 50px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .htag:hover {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+  }
+
+  /* ── CTAs ── */
   .hero-cta {
-    margin-top: 3.5rem;
     display: flex;
-    gap: 1.5rem;
-    align-items: center;
+    gap: 1rem;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.45s both;
-  }
-
-  .hero-right {
-    padding: 11rem 3rem 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    position: relative;
-  }
-
-  .hero-wm {
-    position: absolute;
-    top: 8rem;
-    right: 2.5rem;
-    font-size: 0.55rem;
-    letter-spacing: 0.3em;
-    color: var(--muted);
-    writing-mode: vertical-rl;
-    opacity: 0.4;
-  }
-
-  .hero-quote {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(1.1rem, 2.1vw, 1.5rem);
-    line-height: 1.55;
-    color: rgba(240, 236, 227, 0.62);
-    animation: fadeUp 0.7s 0.3s both;
-  }
-
-  .hero-quote mark {
-    background: none;
-    color: var(--accent);
-    font-style: normal;
-    font-family: var(--mono);
-    font-size: 0.72em;
-    letter-spacing: 0.06em;
-  }
-
-  .hero-stack {
-    margin-top: 4rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.42rem;
+    margin-bottom: 2rem;
     animation: fadeUp 0.6s 0.5s both;
   }
 
-  .stag {
-    font-size: 0.58rem;
+  /* White CTA on blue bg */
+  .hero-cta :global(.btn-primary) {
+    background: #ffffff;
+    color: var(--blue-600);
+  }
+  .hero-cta :global(.btn-primary:hover) {
+    background: var(--blue-50);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    color: var(--blue-700);
+  }
+
+  .btn-outline-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    border: 2px solid rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: background 0.22s, border-color 0.22s, color 0.22s, transform 0.18s;
+    white-space: nowrap;
+  }
+
+  .btn-outline-white:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.8);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  /* ── AVAILABILITY NOTE ── */
+  .hero-avail-note {
+    font-size: 0.7rem;
+    font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--muted);
-    border: 1px solid var(--dim);
-    padding: 0.28rem 0.6rem;
-    transition:
-      color 0.2s,
-      border-color 0.2s;
+    color: rgba(255,255,255,0.5);
+    animation: fadeUp 0.6s 0.6s both;
   }
 
-  .stag:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+  .avatar-ring {
+    width: clamp(280px, 30vw, 400px);
+    height: clamp(280px, 30vw, 400px);
+    border-radius: 50%;
+    overflow: hidden;
+    animation: float 6s ease-in-out infinite;
+    box-shadow:
+      0 0 0 6px rgba(255,255,255,0.15),
+      0 0 0 14px rgba(255,255,255,0.06),
+      0 30px 60px rgba(0,0,0,0.25);
+    background: var(--blue-600);
   }
 
-  /* ══ RESPONSIVE ══ */
-  @media (max-width: 1024px) {
-    .hero {
-      grid-template-columns: 1fr;
+  .avatar-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-outer { padding: 8rem 1.5rem 12rem; }
+    .hero-inner {
+      flex-direction: column;
+      text-align: center;
+      gap: 3rem;
     }
-    .hero-left {
-      border-right: none;
-      border-bottom: 1px solid var(--dim);
-      padding: 9rem 2.5rem 4rem;
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-    .hero-right {
-      padding: 3.5rem 2.5rem 4.5rem;
-    }
-    .hero-wm {
-      display: none;
-    }
-    .hero-sub {
-      max-width: 100%;
+    .hero-tags { justify-content: center; }
+    .hero-cta { justify-content: center; }
+    .hero-image { order: -1; }
+    .avatar-ring {
+      width: 240px;
+      height: 240px;
     }
   }
 
-  @media (max-width: 680px) {
-    .hero-left {
-      padding: 7.5rem 1.5rem 3.5rem;
-    }
-    .hero-right {
-      padding: 3rem 1.5rem 3.5rem;
-    }
-    .hero-name {
-      font-size: clamp(3.8rem, 17vw, 5.5rem);
-    }
+  @media (max-width: 600px) {
+    .hero-tagline { font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.1; }
+    .hero-cta { flex-direction: column; width: 100%; }
+    .hero-cta > a { width: 100%; justify-content: center; }
   }
 </style>
