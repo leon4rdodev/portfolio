@@ -38,7 +38,6 @@ const alternateUrl = getAlternateUrl(Astro.url);
 
 <!-- Mobile overlay -->
 <div class="mob-overlay" id="mob-overlay">
-  <button class="mob-close" id="mob-close" aria-label="Close menu">✕</button>
   <ul class="mob-nav">
     <li><a href="#about">{t("nav.about")}</a></li>
     <li><a href="#services">{t("nav.services")}</a></li>
@@ -95,13 +94,16 @@ const alternateUrl = getAlternateUrl(Astro.url);
     transition: color 0.25s;
   }
 
-  nav.scrolled .nav-logo { color: var(--fg); }
+  nav.scrolled .nav-logo, 
+  nav.menu-open .nav-logo { color: var(--fg); }
 
   .nav-logo .n4 { color: var(--blue-400); }
-  nav.scrolled .nav-logo .n4 { color: var(--accent); }
+  nav.scrolled .nav-logo .n4, 
+  nav.menu-open .nav-logo .n4 { color: var(--accent); }
 
   .nav-logo .br { color: rgba(255,255,255,0.4); }
-  nav.scrolled .nav-logo .br { color: var(--border2); }
+  nav.scrolled .nav-logo .br, 
+  nav.menu-open .nav-logo .br { color: var(--border2); }
 
   /* Links */
   .nav-links {
@@ -192,7 +194,7 @@ const alternateUrl = getAlternateUrl(Astro.url);
     cursor: pointer;
     background: none;
     border: none;
-    padding: 4px;
+    padding: 4px 0 4px 4px;
     z-index: 600;
     position: relative;
   }
@@ -207,7 +209,8 @@ const alternateUrl = getAlternateUrl(Astro.url);
     transform-origin: center;
   }
 
-  nav.scrolled .hamburger span { background: var(--fg); }
+  nav.scrolled .hamburger span,
+  nav.menu-open .hamburger span { background: var(--fg); }
 
   .hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
@@ -217,15 +220,17 @@ const alternateUrl = getAlternateUrl(Astro.url);
   .mob-overlay {
     position: fixed;
     inset: 0;
-    background: var(--surface);
+    background: rgba(248, 250, 255, 0.95); /* var(--bg) with opacity */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     z-index: 400;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3rem 2rem;
+    padding: 3rem 1.5rem;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.32s ease;
+    transition: opacity 0.35s ease;
   }
 
   .mob-overlay.is-open {
@@ -233,63 +238,68 @@ const alternateUrl = getAlternateUrl(Astro.url);
     pointer-events: all;
   }
 
-  .mob-close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.8rem;
-    font-size: 1.1rem;
-    color: var(--fg-3);
-    background: none;
-    border: none;
-    cursor: pointer;
-    width: 36px; height: 36px;
-  }
-
   .mob-nav {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 0.8rem;
   }
-
-  .mob-nav li { border-bottom: 1px solid var(--border); }
-  .mob-nav li:first-child { border-top: 1px solid var(--border); }
 
   .mob-nav a {
-    display: block;
-    font-family: var(--display);
-    font-size: clamp(2.2rem, 10vw, 3.5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.05rem;
+    font-weight: 700;
     letter-spacing: 0.05em;
-    color: var(--fg);
+    color: var(--fg-2);
     text-decoration: none;
-    padding: 0.8rem 0;
-    transition: color 0.2s, padding-left 0.22s;
+    padding: 1.1rem;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: transform 0.2s, background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
   }
 
-  .mob-nav a:hover { color: var(--accent); padding-left: 0.5rem; }
+  .mob-nav a:hover { 
+    color: var(--accent);
+    background: var(--surface2);
+    border-color: var(--border2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.08);
+  }
 
   .mob-footer {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
   }
 
   .mob-footer a {
-    font-size: 0.72rem;
-    font-weight: 500;
+    font-size: 0.65rem;
+    font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--fg-3);
     text-decoration: none;
-    transition: color 0.2s;
+    background: #ffffff;
+    padding: 0.6rem 1rem;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
   }
 
-  .mob-footer a:hover { color: var(--accent); }
+  .mob-footer a:hover { 
+    color: var(--accent); 
+    border-color: var(--accent);
+  }
 
   /* ── BREAKPOINT ── */
   @media (max-width: 680px) {
-    nav { padding: 0 1.5rem; }
     .hamburger { display: flex; }
     .nav-links { display: none; }
     .nav-inner { padding: 1.2rem 0; }
@@ -310,18 +320,17 @@ const alternateUrl = getAlternateUrl(Astro.url);
     // Mobile menu
     const burger = document.getElementById("burger");
     const overlay = document.getElementById("mob-overlay");
-    const closeBtn = document.getElementById("mob-close");
 
     function toggleMenu(force?: boolean) {
       const isOpen =
         force !== undefined ? force : !burger?.classList.contains("is-open");
       burger?.classList.toggle("is-open", isOpen);
       overlay?.classList.toggle("is-open", isOpen);
+      navbar?.classList.toggle("menu-open", isOpen);
       document.body.style.overflow = isOpen ? "hidden" : "";
     }
 
     burger?.addEventListener("click", () => toggleMenu());
-    closeBtn?.addEventListener("click", () => toggleMenu(false));
 
     overlay?.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => toggleMenu(false));

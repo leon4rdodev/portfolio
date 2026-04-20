@@ -37,9 +37,9 @@ const services = [
 ];
 ---
 
-<!-- Services card — overlapping the hero blue section -->
-<div class="services-card-wrap">
-  <div class="services-card">
+<!-- Services section -->
+<section class="sec services-sec" id="services">
+  <div class="container">
     <h2 class="sec-title">{t("services.title")}</h2>
     <p class="sec-sub">
       {lang === "es"
@@ -59,25 +59,13 @@ const services = [
       }
     </div>
   </div>
-</div>
+</section>
 
 <style>
-  /* ── OVERLAP CARD ── */
-  .services-card-wrap {
+  /* ── SERVICES SECTION ── */
+  .services-sec {
     background: var(--bg);
-    padding-top: 0;
-  }
-
-  .services-card {
-    max-width: var(--max-w);
-    margin: -7rem auto 0;
-    background: var(--surface);
-    border-radius: var(--radius-xl);
-    padding: 4rem 3.5rem 4.5rem;
-    box-shadow:
-      0 4px 6px rgba(0,0,0,0.04),
-      0 20px 60px rgba(37,99,235,0.08),
-      0 0 0 1px var(--border);
+    padding-top: 5rem;
     position: relative;
     z-index: 10;
   }
@@ -162,18 +150,12 @@ const services = [
     position: relative;
   }
 
-  /* Responsive */
   @media (max-width: 1024px) {
     .svc-grid { grid-template-columns: 1fr 1fr; }
-    .services-card { padding: 3rem 2.5rem; }
   }
 
   @media (max-width: 680px) {
-    .services-card {
-      margin: -5rem 1rem 0;
-      padding: 2.5rem 1.5rem;
-      border-radius: var(--radius-lg);
-    }
+    .services-sec { padding-top: 3rem; }
     .svc-grid { grid-template-columns: 1fr; gap: 1rem; }
     .svc { padding: 1.5rem; text-align: left; }
     .svc-icon { margin: 0 0 1rem; }

@@ -109,7 +109,6 @@ ul, ol { list-style: none; }
 .container {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 2rem;
 }
 
 /* ---------- Section base ---------- */
@@ -266,5 +265,4 @@ ul, ol { list-style: none; }
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .sec { padding: 5rem 1.5rem; }
-  .container { padding: 0 1.5rem; }
 }
