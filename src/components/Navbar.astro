@@ -24,6 +24,7 @@ const alternateUrl = getAlternateUrl(Astro.url);
       <li><a href="#about">{t("nav.about")}</a></li>
       <li><a href="#services">{t("nav.services")}</a></li>
       <li><a href="#projects">{t("nav.projects")}</a></li>
+      <li><a href="#contact">{t("nav.contact")}</a></li>
       <li>
         <a href={alternateUrl} class="nav-lang">{alternateLang.toUpperCase()}</a>
       </li>
@@ -46,9 +47,9 @@ const alternateUrl = getAlternateUrl(Astro.url);
   </ul>
   <div class="mob-footer">
     <a href={alternateUrl} class="mob-lang">{alternateLang.toUpperCase()}</a>
-    <a href="https://wa.me/18493997434" target="_blank">WhatsApp ↗</a>
-    <a href="mailto:leon4rdodev@gmail.com">leon4rdodev@gmail.com</a>
-    <a href="https://github.com/leon4rdodev" target="_blank">GitHub ↗</a>
+    <a href="https://wa.me/18493997434" target="_blank">{t("mob.whatsapp")}</a>
+    <a href="mailto:leon4rdodev@gmail.com">{t("mob.email")}</a>
+    <a href="https://github.com/leon4rdodev" target="_blank">{t("mob.github")}</a>
   </div>
 </div>
 

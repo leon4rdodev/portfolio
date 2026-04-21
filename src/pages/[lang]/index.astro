@@ -18,19 +18,9 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslations(lang);
-
-const titles: Record<Lang, string> = {
-  es: "Leonardo Victoriano — Fullstack Developer",
-  en: "Leonardo Victoriano — Fullstack Developer",
-};
-
-const descriptions: Record<Lang, string> = {
-  es: "Desarrollo web fullstack con JavaScript y TypeScript. Landing pages, aplicaciones web y software a medida. Entrego en semanas, no en meses.",
-  en: "Fullstack web development with JavaScript and TypeScript. Landing pages, web apps, and custom software. I deliver in weeks, not months.",
-};
 ---
 
-<Layout title={titles[lang]} description={descriptions[lang]} lang={lang}>
+<Layout title={t("page.title")} description={t("page.description")} lang={lang}>
   <Navbar lang={lang} />
   <main>
     <Hero lang={lang} />

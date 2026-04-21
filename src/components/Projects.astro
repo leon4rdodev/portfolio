@@ -6,6 +6,7 @@ import tiksnapImg from "../assets/projects/tiksnap.webp";
 import tonyranchImg from "../assets/projects/tonyranch.webp";
 import skymodsImg from "../assets/projects/skymods.webp";
 import bocatiImg from "../assets/projects/bocati.webp";
+import melissaImg from "../assets/projects/melissahairstyle.webp";
 
 interface Props {
   lang: Lang;
@@ -27,6 +28,16 @@ const projects = [
   },
   {
     n: "002",
+    name: t("project.melissa.name"),
+    description: t("project.melissa.description"),
+    tags: t("project.melissa.tags").split(","),
+    url: "https://melissahairstyle.com/",
+    image: melissaImg,
+    color: "#fdf4ff",
+    accent: "#a855f7",
+  },
+  {
+    n: "003",
     name: t("project.tonyranch.name"),
     description: t("project.tonyranch.description"),
     tags: t("project.tonyranch.tags").split(","),
@@ -37,7 +48,7 @@ const projects = [
     accent: "#0284c7",
   },
   {
-    n: "003",
+    n: "004",
     name: t("project.skymods.name"),
     description: t("project.skymods.description"),
     tags: t("project.skymods.tags").split(","),
@@ -47,7 +58,7 @@ const projects = [
     accent: "#3b82f6",
   },
   {
-    n: "004",
+    n: "005",
     name: t("project.bocati.name"),
     description: t("project.bocati.description"),
     tags: t("project.bocati.tags").split(","),
@@ -60,17 +71,40 @@ const projects = [
 ---
 
 <section class="sec projects-sec" id="projects">
+  <div class="section-decor">
+    <div class="glass-code p-1 animate-on-scroll">
+      <span class="kw">git commit</span> -m <span class="st">"feat: ship it"</span>
+    </div>
+    <div class="glass-code p-2 animate-on-scroll">
+      <span class="vn">v1.2.0</span> - stable
+    </div>
+    <div class="glass-code p-3 animate-on-scroll">
+      <span class="kw">merge</span> branch <span class="st">'main'</span>
+    </div>
+    <div class="glass-code p-4 animate-on-scroll">
+      <span class="kw">git merge</span> --no-ff
+    </div>
+    <div class="glass-code p-5 animate-on-scroll">
+      <span class="kw">DEPLOY:</span> <span class="vn">SUCCESS</span>
+    </div>
+    <div class="glass-code p-6 animate-on-scroll">
+      <span class="vn">browsers</span> => [<span class="st">'Chrome'</span>, <span class="st">'Safari'</span>]
+    </div>
+    <div class="glass-code p-7 animate-on-scroll">
+      <span class="vn">lighthouse</span>.score = <span class="st">100</span>
+    </div>
+    <div class="glass-code p-8 animate-on-scroll">
+      <span class="kw">await</span> <span class="fn">deploy</span>()
+    </div>
+  </div>
+
   <div class="container">
     <h2 class="sec-title">{t("projects.title")}</h2>
-    <p class="sec-sub">
-      {lang === "es"
-        ? "Productos reales, en producción, con usuarios reales."
-        : "Real products, in production, with real users."}
-    </p>
+    <p class="sec-sub">{t("projects.sub")}</p>
 
     <div class="proj-grid">
       {
-        projects.map((proj) => (
+        projects.map((proj) =>
           proj.url ? (
             <a
               href={proj.url}
@@ -103,9 +137,7 @@ const projects = [
               </div>
               <!-- Hover overlay -->
               <div class="proj-overlay">
-                <span class="proj-visit">
-                  {lang === "es" ? "Ver proyecto ↗" : "View project ↗"}
-                </span>
+                <span class="proj-visit">{t("projects.visit")}</span>
               </div>
             </a>
           ) : (
@@ -136,7 +168,7 @@ const projects = [
               </div>
             </div>
           )
-        ))
+        )
       }
     </div>
   </div>
@@ -146,6 +178,8 @@ const projects = [
   .projects-sec {
     background: var(--bg);
     padding-top: 7rem;
+    position: relative;
+    overflow: hidden;
   }
 
   /* ── GRID ── */
@@ -153,6 +187,20 @@ const projects = [
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.75rem;
+  }
+
+  /* Center last item if odd */
+  .proj:last-child:nth-child(odd) {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: 100%;
+    max-width: calc(50% - 0.875rem);
+  }
+
+  @media (max-width: 768px) {
+    .proj:last-child:nth-child(odd) {
+      max-width: none;
+    }
   }
 
   /* ── CARD ── */
@@ -324,6 +372,32 @@ const projects = [
     transform: none;
     box-shadow: none;
     border-color: var(--border);
+  }
+
+  /* ── DECOR ── */
+  .p-1 { top: 8%; right: 6%; animation-delay: 2s; }
+  .p-2 { bottom: 12%; left: 5%; animation-delay: 0.5s; }
+  .p-3 { 
+    top: 50%; 
+    left: -20px; 
+    transform: translateY(-50%) rotate(-90deg); 
+    animation-delay: 1.2s; 
+    opacity: 0.6; 
+  }
+  .p-4 { top: 6%; left: 12%; animation-delay: 3s; opacity: 0.6; }
+  .p-5 { bottom: 8%; right: 10%; animation-delay: 1s; transform: rotate(5deg); }
+  .p-6 { 
+    top: 50%; 
+    right: -20px; 
+    transform: translateY(-50%) rotate(-90deg); 
+    animation-delay: 0.8s; 
+    opacity: 0.6;
+  }
+  .p-7 { bottom: calc(6% - 50px); left: 10%; animation-delay: 2.5s; opacity: 0.5; }
+  .p-8 { top: 82%; right: 6%; animation-delay: 1.5s; }
+
+  @media (max-width: 1024px) {
+    .p-3, .p-4, .p-7 { display: none; }
   }
 
   /* Responsive */

@@ -38,6 +38,33 @@ const links = [
 ---
 
 <section class="contact-outer sec" id="contact">
+  <div class="section-decor">
+    <div class="glass-code c-1 animate-on-scroll">
+      <span class="kw">const</span> <span class="vn">project</span> = <span class="kw">await</span> <span class="fn">ship</span>();
+    </div>
+    <div class="glass-code c-2 animate-on-scroll">
+      <span class="kw">export default</span> <span class="fn">Dashboard</span>;
+    </div>
+    <div class="glass-code c-3 animate-on-scroll">
+      <span class="vn">theme</span>: <span class="st">'precision'</span>
+    </div>
+    <div class="glass-code c-4 animate-on-scroll">
+      <span class="fn">git</span> <span class="vn">push</span> <span class="kw">-f</span> origin main
+    </div>
+    <div class="glass-code c-5 animate-on-scroll">
+      <span class="kw">tel:</span> <span class="st">+1 849 399 7434</span>
+    </div>
+    <div class="glass-code c-6 animate-on-scroll">
+      <span class="fn">connect</span>(<span class="vn">USER_ID</span>)
+    </div>
+    <div class="glass-code c-7 animate-on-scroll">
+      <span class="vn">socket</span>.<span class="fn">emit</span>(<span class="st">'ping'</span>)
+    </div>
+    <div class="glass-code c-8 animate-on-scroll">
+      <span class="kw">new</span> <span class="fn">Connection</span>()
+    </div>
+  </div>
+
   <div class="container">
     <!-- Header -->
     <div class="contact-head animate-on-scroll">
@@ -77,6 +104,8 @@ const links = [
   .contact-outer {
     background: var(--surface);
     border-top: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
   }
 
   .contact-head { margin-bottom: 3rem; }
@@ -188,7 +217,20 @@ const links = [
     transform: translate(3px, -3px);
   }
 
-  /* Responsive */
+  /* ── DECOR ── */
+  .c-1 { top: 6%; left: 6%; animation-delay: 0s; }
+  .c-2 { top: 55%; left: 4%; animation-delay: 1s; }
+  .c-3 { top: 12%; right: 4%; animation-delay: 2s; }
+  .c-4 { bottom: 12%; right: 6%; animation-delay: 1.5s; }
+  .c-5 { top: 5%; right: 18%; animation-delay: 3s; opacity: 0.6; }
+  .c-6 { top: 28%; left: 8%; animation-delay: 0.5s; transform: rotate(-8deg); }
+  .c-7 { top: 35%; right: 5%; animation-delay: 2.2s; opacity: 0.5; }
+  .c-8 { bottom: 6%; left: 6%; animation-delay: 4s; }
+
+  @media (max-width: 1024px) {
+    .c-2, .c-3, .c-6, .c-7 { display: none; }
+  }
+
   @media (max-width: 680px) {
     .c-cards { grid-template-columns: 1fr; max-width: 400px; }
     .ccard { flex-direction: row; text-align: left; padding: 1.4rem 1.5rem; }

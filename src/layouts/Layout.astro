@@ -16,7 +16,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, lang, ogImage = "/og-image.png" } = Astro.props;
+const { title, description, lang, ogImage = "/og-image.webp" } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const alternateLang = lang === "es" ? "en" : "es";
 const alternateUrl = new URL(
@@ -83,6 +83,18 @@ const ogImageUrl = new URL(ogImage, Astro.site);
           observer.observe(el);
         });
       });
+
+      // Reactive Favicon Logic
+      const updateFavicon = () => {
+        const favicon = document.querySelector('link[rel="icon"]');
+        if (!favicon) return;
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches || document.documentElement.classList.contains('dark');
+        const baseUrl = favicon.getAttribute('href').split('?')[0];
+        favicon.setAttribute('href', `${baseUrl}?v=${isDark ? 'd' : 'l'}`);
+      };
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
+      document.addEventListener("astro:page-load", updateFavicon);
     </script>
   </body>
 </html>

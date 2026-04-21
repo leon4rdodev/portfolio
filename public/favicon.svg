@@ -1,5 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="none">
-  <rect width="36" height="36" rx="8" fill="#0a0a0f"/>
-  <text x="6" y="26" font-family="Inter, sans-serif" font-size="22" font-weight="700" fill="#f0f0f5">L</text>
-  <text x="17" y="26" font-family="Inter, sans-serif" font-size="22" font-weight="700" fill="#3b82f6">D</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .icon-path { 
+      fill: #1e1e1e; 
+    }
+    @media (prefers-color-scheme: dark) {
+      .icon-path { 
+        fill: #FFFFFF; 
+      }
+    }
+  </style>
+  <!-- < symbol -->
+  <path class="icon-path" d="M9 10L3 16L9 22L10.4 20.6L5.8 16L10.4 11.4L9 10Z" />
+  <!-- / symbol -->
+  <path class="icon-path" d="M19.5 6L11 26H13L21.5 6H19.5Z" />
+  <!-- > symbol -->
+  <path class="icon-path" d="M23 10L21.6 11.4L26.2 16L21.6 20.6L23 22L29 16L23 10Z" />
 </svg>

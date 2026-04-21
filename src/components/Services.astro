@@ -39,13 +39,33 @@ const services = [
 
 <!-- Services section -->
 <section class="sec services-sec" id="services">
+  <div class="section-decor">
+    <div class="glass-code s-1 animate-on-scroll">
+      <span class="fn">docker-compose</span> up -d
+    </div>
+    <div class="glass-code s-2 animate-on-scroll">
+      <span class="kw">POST</span> /api/v1/ship
+    </div>
+    <div class="glass-code s-3 animate-on-scroll">
+      <span class="kw">kubectl</span> get pods
+    </div>
+    <div class="glass-code s-4 animate-on-scroll">
+      <span class="fn">docker build</span> -t app .
+    </div>
+    <div class="glass-code s-5 animate-on-scroll">
+      <span class="vn">app</span>.<span class="fn">use</span>(<span class="fn">cors</span>())
+    </div>
+    <div class="glass-code s-6 animate-on-scroll">
+      <span class="vn">server</span>.<span class="fn">listen</span>(<span class="st">3000</span>)
+    </div>
+    <div class="glass-code s-7 animate-on-scroll">
+      <span class="kw">npm install</span> @astrojs/react
+    </div>
+  </div>
+
   <div class="container">
     <h2 class="sec-title">{t("services.title")}</h2>
-    <p class="sec-sub">
-      {lang === "es"
-        ? "Desarrollo web que entrega resultados reales, en tiempo real."
-        : "Web development that delivers real results, on real time."}
-    </p>
+    <p class="sec-sub">{t("services.sub")}</p>
 
     <div class="svc-grid">
       {
@@ -65,9 +85,10 @@ const services = [
   /* ── SERVICES SECTION ── */
   .services-sec {
     background: var(--bg);
-    padding-top: 5rem;
+    padding: 5rem 0 8rem;
     position: relative;
     z-index: 10;
+    overflow: hidden;
   }
 
   /* ── GRID ── */
@@ -150,7 +171,17 @@ const services = [
     position: relative;
   }
 
+  /* ── DECOR ── */
+  .s-1 { top: 6%; left: 6%; animation-delay: 0s; }
+  .s-2 { bottom: 8%; right: 5%; animation-delay: 1.5s; opacity: 0.45; }
+  .s-3 { top: 18%; right: 6%; animation-delay: 0.8s; transform: rotate(8deg); }
+  .s-4 { top: 4%; right: 15%; animation-delay: 2.2s; opacity: 0.6; }
+  .s-5 { bottom: 6%; left: 50%; animation-delay: 1.1s; transform: translateX(-50%) rotate(-5deg); }
+  .s-6 { top: 28%; left: 5%; animation-delay: 3s; }
+  .s-7 { bottom: 4%; left: 6%; animation-delay: 0.5s; opacity: 0.4; }
+
   @media (max-width: 1024px) {
+    .s-3, .s-5, .s-7 { display: none; }
     .svc-grid { grid-template-columns: 1fr 1fr; }
   }
 

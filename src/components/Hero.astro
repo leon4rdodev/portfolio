@@ -18,14 +18,25 @@ const stackTags = [
 ---
 
 <section class="hero-outer">
-  <!-- Shapes background -->
-  <div class="bg-shapes" aria-hidden="true">
-    <span class="shape s1">&lt;/&gt;</span>
-    <span class="shape s2">{ }</span>
-    <span class="shape s3">( )</span>
-    <span class="shape s4">[ ]</span>
-    <span class="shape s5">&lt;/&gt;</span>
-    <span class="shape s6">&lt;/&gt;</span>
+  <div class="section-decor" aria-hidden="true">
+    <div class="glass-code h-1">
+      <span class="kw">npx</span> create-next-app@latest
+    </div>
+    <div class="glass-code h-2">
+      <span class="kw">const</span> <span class="vn">&#123;Leon4rdo&#125;</span> = <span class="fn">require</span>(<span class="st">'portfolio'</span>)
+    </div>
+    <div class="glass-code h-4">
+      <span class="kw">import</span> &#123; <span class="vn">Ship</span> &#125; <span class="kw">from</span> <span class="st">'prod'</span>
+    </div>
+    <div class="glass-code h-5">
+      <span class="fn">bun</span> run dev
+    </div>
+    <div class="glass-code h-8">
+      &lt;<span class="vn">Container</span> /&gt;
+    </div>
+    <div class="glass-code h-tag-1">&lt;/&gt;</div>
+    <div class="glass-code h-tag-2">&lt;/&gt;</div>
+  </div>
   </div>
 
   <div class="hero-inner">
@@ -68,7 +79,7 @@ const stackTags = [
       <div class="avatar-ring">
         <img
           src={userAvatar.src}
-          alt="Leonardo Victoriano — Fullstack Developer"
+          alt={`Leonardo Victoriano — ${t("hero.role")}`}
           width="400"
           height="400"
           loading="eager"
@@ -95,32 +106,31 @@ const stackTags = [
     overflow: hidden;
   }
 
-  /* ── BG SHAPES ── */
-  .bg-shapes {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-  }
+  /* ── DECOR ── */
+  /* ── DECOR ── */
+  .h-1 { top: 6%; left: 4%; animation-delay: 0s; }
+  .h-2 { top: calc(9% + 120px); right: 6%; animation-delay: 1.2s; transform: rotate(30deg); }
+  .h-4 { bottom: 22%; right: 4%; animation-delay: 2.1s; transform: rotate(-3deg); }
+  .h-5 { top: 65%; left: 3%; animation-delay: 0.8s; opacity: 0.6; }
+  .h-8 { bottom: 8%; left: 6%; animation-delay: 1.7s; opacity: 0.5; }
 
-  .bg-shapes .shape {
-    position: absolute;
-    font-family: var(--mono, monospace);
-    font-weight: 800;
-    line-height: 1;
-    color: #ffffff;
+  /* ── GIANT TAGS ── */
+  .h-tag-1, .h-tag-2 {
+    font-size: 22rem;
+    font-weight: 900;
     opacity: 0.04;
-    user-select: none;
-    white-space: nowrap;
+    padding: 0;
+    background: none;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    pointer-events: none;
+    z-index: -1;
   }
+  .h-tag-1 { top: -5%; right: -2%; transform: rotate(15deg); }
+  .h-tag-2 { bottom: 10%; left: -5%; transform: rotate(-20deg); }
 
-  .s1 { font-size: 18rem; top: 8%; right: -2%; transform: rotate(15deg); opacity: 0.06; }
-  .s2 { font-size: 14rem; bottom: 12%; left: -2%; transform: rotate(-25deg); opacity: 0.08; }
-  .s3 { font-size: 10rem; top: 40%; left: 48%; transform: rotate(-10deg); opacity: 0.04; }
-  .s4 { font-size: 12rem; top: 10%; left: 12%; transform: rotate(35deg); opacity: 0.05; }
-  .s5 { font-size: 24rem; bottom: -2%; right: -2%; transform: rotate(-15deg); opacity: 0.05; }
-  .s6 { font-size: 16rem; bottom: 18%; left: 8%; transform: rotate(20deg); opacity: 0.04; }
 
   /* ── WAVE DIVIDER ── */
   .hero-wave {
@@ -196,12 +206,12 @@ const stackTags = [
 
   /* ── TAGLINE — main heading ── */
   .hero-tagline {
-    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-size: clamp(1.6rem, 3.2vw, 2.6rem);
     font-weight: 800;
-    line-height: 1.15;
+    line-height: 1.2;
     letter-spacing: -0.02em;
     color: #ffffff;
-    max-width: 620px;
+    max-width: 580px;
     margin-bottom: 1.5rem;
     animation: fadeUp 0.7s 0.2s both;
   }
@@ -348,13 +358,9 @@ const stackTags = [
     .hero-cta > a { width: 100%; justify-content: center; }
   }
 
-  /* ── RESPONSIVE BG SHAPES ── */
-  @media (max-width: 900px) {
-    .s1 { font-size: 10rem; top: 2%; right: -5%; }
-    .s2 { display: none; } /* Hide clutter on small screens */
-    .s3 { display: none; }
-    .s4 { display: none; }
-    .s5 { font-size: 16rem; bottom: -5%; right: -5%; }
-    .s6 { font-size: 10rem; top: 15%; left: -5%; }
+  /* ── RESPONSIVE SECTION DECOR ── */
+  @media (max-width: 1024px) {
+    .h-7, .h-8, .h-9 { display: none; }
   }
+
 </style>

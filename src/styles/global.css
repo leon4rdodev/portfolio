@@ -252,8 +252,8 @@ ul, ol { list-style: none; }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
+  0%, 100% { transform: translate(var(--tx, 0), 0) rotate(var(--rot, 0deg)); }
+  50%       { transform: translate(var(--tx, 0), -10px) rotate(var(--rot, 0deg)); }
 }
 
 /* ---------- Scrollbar ---------- */
@@ -265,4 +265,46 @@ ul, ol { list-style: none; }
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .sec { padding: 5rem 1.5rem; }
+}
+
+/* ---------- Glass Code System ---------- */
+.section-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.glass-code {
+  position: absolute;
+  padding: 0.8rem 1.4rem;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(37, 99, 235, 0.15);
+  border-radius: 12px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  box-shadow: 
+    0 10px 40px rgba(37, 99, 235, 0.08),
+    0 1px 2px rgba(37, 99, 235, 0.05);
+  white-space: nowrap;
+  opacity: 0.9;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  z-index: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Syntax Highlighting - Improved Contrast */
+.glass-code .kw { color: #d946ef; font-weight: 700; } /* Fuchsia/Purple */
+.glass-code .fn { color: #2563eb; } /* Royal Blue */
+.glass-code .vn { color: #0891b2; } /* Cyan */
+.glass-code .st { color: #ea580c; } /* Orange */ 
+
+@media (max-width: 680px) {
+  .section-decor { display: none; }
 }
