@@ -199,6 +199,7 @@ const projects = [
 
   @media (max-width: 768px) {
     .proj:last-child:nth-child(odd) {
+      grid-column: auto;
       max-width: none;
     }
   }
@@ -229,11 +230,12 @@ const projects = [
   /* Visual / Mockup area */
   .proj-visual {
     background: var(--proj-bg, var(--blue-50));
-    padding: 2rem 2rem 0;
+    padding: 4rem 1.5rem 0; /* Increased top padding */
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    min-height: 160px;
+    height: 300px; /* Increased height to accommodate more padding */
+    overflow: hidden;
   }
 
   .proj-mockup {
@@ -266,11 +268,14 @@ const projects = [
     padding: 0;
     display: block;
     line-height: 0;
+    overflow: hidden;
+    max-height: 100%;
   }
 
   .mock-body img {
     width: 100%;
     height: auto;
+    object-fit: cover;
     object-position: top;
     display: block;
   }
@@ -403,5 +408,6 @@ const projects = [
   /* Responsive */
   @media (max-width: 768px) {
     .proj-grid { grid-template-columns: 1fr; }
+    .proj-visual { height: 200px; padding: 1.25rem 1.25rem 0; }
   }
 </style>

@@ -85,7 +85,7 @@ const services = [
   /* ── SERVICES SECTION ── */
   .services-sec {
     background: var(--bg);
-    padding: 5rem 0 8rem;
+    padding: 5rem 0 8rem; /* No side padding on desktop */
     position: relative;
     z-index: 10;
     overflow: hidden;
@@ -186,7 +186,7 @@ const services = [
   }
 
   @media (max-width: 680px) {
-    .services-sec { padding-top: 3rem; }
+    .services-sec { padding: 3rem 1.5rem 8rem; } /* Restore side padding for mobile single-column layout */
     .svc-grid { grid-template-columns: 1fr; gap: 1rem; }
     .svc { padding: 1.5rem; text-align: left; }
     .svc-icon { margin: 0 0 1rem; }
