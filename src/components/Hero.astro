@@ -1,6 +1,7 @@
 ---
 import type { Lang } from "../i18n/ui";
 import { useTranslations } from "../i18n/utils";
+import { Icon } from "astro-icon/components";
 import userAvatar from "../assets/icon/leon4rdo.webp";
 
 interface Props {
@@ -11,9 +12,17 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const stackTags = [
-  "Next.js", "React", "Astro", "NestJS",
-  "Node.js", "TypeScript", "PostgreSQL",
-  "MongoDB", "Docker", "Supabase",
+  { label: "Next.js", icon: "simple-icons:nextdotjs" },
+  { label: "React", icon: "simple-icons:react" },
+  { label: "React Native", icon: "simple-icons:react" },
+  { label: "Astro", icon: "simple-icons:astro" },
+  { label: "NestJS", icon: "simple-icons:nestjs" },
+  { label: "Node.js", icon: "simple-icons:nodedotjs" },
+  { label: "TypeScript", icon: "simple-icons:typescript" },
+  { label: "PostgreSQL", icon: "simple-icons:postgresql" },
+  { label: "MongoDB", icon: "simple-icons:mongodb" },
+  { label: "Docker", icon: "simple-icons:docker" },
+  { label: "Supabase", icon: "simple-icons:supabase" },
 ];
 ---
 
@@ -37,22 +46,10 @@ const stackTags = [
     <div class="glass-code h-tag-1">&lt;/&gt;</div>
     <div class="glass-code h-tag-2">&lt;/&gt;</div>
   </div>
-  </div>
 
   <div class="hero-inner">
 
     <div class="hero-content">
-      <!-- Premium Role Badge -->
-      <div class="hero-role-badge">
-        <span class="badge-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="16 18 22 12 16 6"></polyline>
-            <polyline points="8 6 2 12 8 18"></polyline>
-          </svg>
-        </span>
-        {t("hero.role")}
-      </div>
-
       <!-- Tagline — THE hero statement -->
       <h1 class="hero-tagline">{t("hero.tagline")}</h1>
 
@@ -61,7 +58,12 @@ const stackTags = [
 
       <!-- Stack tags -->
       <div class="hero-tags">
-        {stackTags.map(tag => <span class="htag">{tag}</span>)}
+        {stackTags.map((tag) => (
+          <span class="htag">
+            <Icon name={tag.icon} class="htag-icon" aria-hidden="true" />
+            {tag.label}
+          </span>
+        ))}
       </div>
 
       <!-- CTAs -->
@@ -174,36 +176,6 @@ const stackTags = [
     animation: fadeUp 0.6s 0.2s both;
   }
 
-  /* ── PREMIUM ROLE BADGE ── */
-  .hero-role-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--blue-700);
-    background: #ffffff;
-    padding: 0.45rem 1.1rem;
-    border-radius: 50px;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    animation: fadeUp 0.6s 0.1s both;
-  }
-
-  .badge-icon {
-    display: flex;
-    align-items: center;
-    color: var(--accent);
-  }
-  
-  .badge-icon svg {
-    width: 14px;
-    height: 14px;
-    stroke-width: 2.5;
-  }
-
   /* ── TAGLINE — main heading ── */
   .hero-tagline {
     font-size: clamp(1.6rem, 3.2vw, 2.6rem);
@@ -238,6 +210,9 @@ const stackTags = [
   }
 
   .htag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 0.67rem;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -247,6 +222,19 @@ const stackTags = [
     padding: 0.35rem 0.8rem;
     border-radius: 50px;
     transition: background 0.2s, color 0.2s;
+  }
+
+  .htag-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+    display: inline-block;
+    flex-shrink: 0;
+    color: #fff;
+    opacity: 0.92;
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
   }
 
   .htag:hover {
