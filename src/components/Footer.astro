@@ -1,6 +1,6 @@
 ---
 import type { Lang } from "../i18n/ui";
-import { useTranslations } from "../i18n/utils";
+import { useTranslations, getAlternateLang } from "../i18n/utils";
 
 interface Props {
   lang: Lang;
@@ -8,56 +8,196 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const alternateLang = getAlternateLang(lang);
+
+const navLinks = [
+  { label: t("nav.about"), href: `/${lang}/#about` },
+  { label: t("nav.services"), href: `/${lang}/#services` },
+  { label: t("nav.projects"), href: `/${lang}/#projects` },
+  { label: t("nav.blog"), href: `/${lang}/blog/` },
+  { label: t("nav.faq"), href: `/${lang}/faq/` },
+  { label: t("nav.contact"), href: `/${lang}/#contact` },
+];
+
+const serviceLinks = [
+  { label: lang === "es" ? "Desarrollo Web" : "Web Development", href: `/${lang}/servicios/desarrollo-web/` },
+  { label: lang === "es" ? "Landing Pages" : "Landing Pages", href: `/${lang}/servicios/landing-pages/` },
+  { label: lang === "es" ? "Software a Medida" : "Custom Software", href: `/${lang}/servicios/software-a-medida/` },
+  { label: lang === "es" ? "APIs y Backend" : "APIs & Backend", href: `/${lang}/servicios/apis-backend/` },
+];
+
+const contactLinks = [
+  { label: "WhatsApp", href: "https://wa.me/18493997434", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>` },
+  { label: "leon4rdodev@gmail.com", href: "mailto:leon4rdodev@gmail.com", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>` },
+  { label: "GitHub", href: "https://github.com/leon4rdodev", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>` },
+];
 ---
 
 <footer>
-  <div class="footer-inner container">
-    <a href="/" class="foot-logo" style="text-transform:lowercase"><span class="br">&lt;</span>leon<span class="n4">4</span>rdo<span class="br">/&gt;</span></a>
-    <p class="foot-copy">{t("footer.copy")}</p>
+  <div class="footer-main container">
+    <div class="footer-cols">
+      <div class="footer-brand">
+        <a href={`/${lang}/`} class="foot-logo" style="text-transform:lowercase"><span class="br">&lt;</span>leon<span class="n4">4</span>rdo<span class="br">/&gt;</span></a>
+        <p class="foot-desc">{lang === "es" ? "Desarrollador fullstack en Santo Domingo, RD. Construyo software que resuelve problemas reales para negocios dominicanos y clientes internacionales." : "Fullstack developer in Santo Domingo, DR. I build software that solves real problems for DR businesses and international clients."}</p>
+      </div>
+      <div class="footer-nav">
+        <h4>{lang === "es" ? "Navegación" : "Navigation"}</h4>
+        <ul>
+          {navLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="footer-nav">
+        <h4>{lang === "es" ? "Servicios" : "Services"}</h4>
+        <ul>
+          {serviceLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="footer-nav">
+        <h4>{lang === "es" ? "Contacto" : "Contact"}</h4>
+        <ul class="foot-contact">
+          {contactLinks.map((link) => (
+            <li>
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                <span class="foot-icon" set:html={link.icon} />
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p class="foot-copy">{t("footer.copy")}</p>
+      <p class="foot-location">Santo Domingo, República Dominicana</p>
+    </div>
   </div>
 </footer>
 
 <style>
   footer {
     background: var(--surface);
-    border-top: 1px solid var(--border);
-    padding: 2.2rem 2rem;
   }
 
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
+  .footer-main {
+    padding: 4rem 2rem 3rem;
+  }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
   }
 
   .foot-logo {
     font-family: var(--display);
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     letter-spacing: 0.28em;
-    color: var(--fg-3);
+    color: var(--fg);
     text-decoration: none;
-    transition: color 0.2s;
+    display: inline-block;
+    margin-bottom: 1rem;
   }
 
-  .foot-logo:hover { color: var(--accent) !important; }
-
+  .foot-logo:hover { color: var(--accent); }
   .foot-logo .n4 { color: var(--accent); }
   .foot-logo .br { color: var(--border2); }
+
+  .foot-desc {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--fg-3);
+    margin-bottom: 1.5rem;
+    max-width: 300px;
+  }
+
+  .footer-nav h4 {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--fg-3);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .footer-nav a {
+    font-size: 0.82rem;
+    color: var(--fg-2);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-nav a:hover { color: var(--accent); }
+
+  .foot-icon {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    color: var(--fg-3);
+    flex-shrink: 0;
+  }
+
+  .footer-nav a:hover .foot-icon { color: var(--accent); }
+
+  .foot-contact li a {
+    font-size: 0.78rem;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+  }
+
+  .footer-bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
 
   .foot-copy {
     font-size: 0.68rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     color: var(--fg-3);
+    margin: 0;
   }
 
-  @media (max-width: 680px) {
-    .footer-inner {
-      flex-direction: column;
-      text-align: center;
-      gap: 0.6rem;
-      padding: 1.5rem;
+  .foot-location {
+    font-size: 0.68rem;
+    color: var(--fg-3);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .footer-cols {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
     }
+    .footer-brand { grid-column: span 2; }
+  }
+
+  @media (max-width: 600px) {
+    .footer-cols { grid-template-columns: 1fr; }
+    .footer-brand { grid-column: span 1; }
+    .footer-bottom-inner { flex-direction: column; text-align: center; }
   }
 </style>

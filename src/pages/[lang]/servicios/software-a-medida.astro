@@ -1,0 +1,328 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { languages, type Lang } from "../../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const featuresIcons = [
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
+];
+
+const data = {
+  es: {
+    title: "Software a Medida en RD | Sistemas de Gestión, POS, Facturación DGII",
+    description: "Software a medida para negocios dominicanos. Sistemas de gestión empresarial, punto de venta (POS), control de inventario, facturación electrónica DGII, dashboards. Desarrollador fullstack en Santo Domingo.",
+    h1: "Software a Medida para tu Negocio en RD",
+    intro: "Si tu negocio todavía depende de hojas de Excel, cuadernos o procesos manuales para operar — estás perdiendo tiempo, dinero y oportunidades. Un sistema hecho a la medida de lo que necesitas puede cambiarlo todo.",
+    problem: {
+      h2: "¿Por qué tu negocio en RD necesita software a medida?",
+      p: "Los sistemas genéricos te obligan a adaptar tu negocio a ellos. Pagas por funciones que no usas y careces de las que realmente necesitas. El software a medida se adapta a tu negocio, crece contigo y resuelve exactamente tus problemas. En RD, donde cada negocio tiene sus propias particularidades (facturación DGII, pasarelas de pago locales, regulaciones fiscales), el software genérico simplemente no corta.",
+    },
+    features: [
+      "100% personalizado a tu negocio — nada de funcionalidades que no uses",
+      "Facturación electrónica DGII integrada (Ley 32-23)",
+      "Pasarelas de pago dominicanas: Azul, CardNet, PayPal",
+      "Panel administrador intuitivo — gestiona todo sin código",
+      "Reportes financieros en tiempo real",
+      "Multi-sucursal y multi-usuario con roles y permisos",
+      "Funciona online y offline (PWA)",
+      "Código limpio y documentado — mantenible por cualquier dev",
+    ],
+    types: {
+      h2: "Tipos de software que construyo",
+      items: [
+        { t: "Sistema de Gestión Empresarial", d: "Control de inventario, facturación, compras, ventas, cuentas por cobrar/pagar, reportes financieros. El reemplazo definitivo del Excel.", p: "Desde US$2,000" },
+        { t: "Punto de Venta (POS)", d: "Para restaurantes, tiendas, colmados y comercios en RD. Con control de inventario integrado, facturación electrónica y reportes de ventas diarias.", p: "Desde US$1,500" },
+        { t: "Dashboard Administrativo", d: "Visualiza las métricas clave de tu negocio en tiempo real: ventas, inventario, rendimiento, gráficos interactivos.", p: "Desde US$1,000" },
+        { t: "Sistema de Reservas", d: "Para hoteles, restaurantes, centros de belleza. Calendario, disponibilidad en tiempo real, notificaciones automáticas.", p: "Desde US$1,500" },
+        { t: "Sistema de Préstamos", d: "Para financieras, cooperativas y prestamistas. Gestión de clientes, pagos, intereses, mora, reportes.", p: "Desde US$2,500" },
+      ],
+    },
+    process: {
+      h2: "Mi proceso de desarrollo",
+      steps: [
+        { n: "01", t: "Descubrimiento", d: "Entrevista profunda para entender tu negocio, procesos, dolores y objetivos. Reviso cómo operas hoy para diseñar la mejor solución." },
+        { n: "02", t: "Arquitectura", d: "Diseño la estructura del sistema: base de datos, frontend, API, integraciones. Te explico el plan antes de escribir una línea de código." },
+        { n: "03", t: "Desarrollo ágil", d: "Construyo el sistema en ciclos cortos (sprints). Cada 1–2 semanas te muestro avances funcionales que puedes probar." },
+        { n: "04", t: "Pruebas y correcciones", d: "Pruebas integrales de funcionalidad, seguridad y rendimiento. Corrijo cualquier issue antes del despliegue." },
+        { n: "05", t: "Despliegue y capacitación", d: "Pongo el sistema en producción, configuro todo lo necesario y te capacito a ti y a tu equipo para usarlo." },
+        { n: "06", t: "Soporte continuo", d: "No desaparezco después de entregar. Ofrezco soporte, mantenimiento y mejoras continuas." },
+      ],
+    },
+    faq: [
+      { q: "¿Cuánto cuesta un sistema de gestión en RD?", a: "Desde US$2,000 para un sistema básico. El precio final depende de la complejidad y las funcionalidades. Te doy un presupuesto detallado antes de empezar." },
+      { q: "¿Incluye facturación electrónica DGII?", a: "Sí. Integro tu sistema con los proveedores autorizados de e-CF para cumplir con la Ley 32-23. Facturación automatizada, envío de comprobantes y reportes fiscales." },
+      { q: "¿Cuánto tiempo toma desarrollar un sistema a medida?", a: "Depende de la complejidad. Un sistema básico puede tomar 3–4 semanas. Un sistema completo con múltiples módulos puede tomar 2–3 meses. Siempre te doy una fecha estimada." },
+      { q: "¿Puedo usar el sistema en varias sucursales?", a: "Sí. Todos mis sistemas son multi-sucursal y multi-usuario. Cada sucursal y cada empleado tiene sus propios permisos." },
+      { q: "¿Y si necesito cambios después de entregado?", a: "Ofrezco soporte continuo y tarifas preferenciales para mejoras futuras. El sistema está construido para crecer contigo." },
+      { q: "¿Qué pasa si me voy a otro proveedor?", a: "Te entrego el código fuente completo, la documentación y todo lo necesario para que cualquier desarrollador pueda tomar el proyecto." },
+    ],
+    cta: "¿Listo para dejar atrás los Excel y los procesos manuales? Escríbeme por WhatsApp y conversemos sobre tu proyecto.",
+    keywords: "software a medida RD, sistema de gestión República Dominicana, punto de venta RD, facturación electrónica DGII, control de inventario Santo Domingo, POS República Dominicana, sistema para negocios RD",
+  },
+  en: {
+    title: "Custom Software Development | Management Systems & POS",
+    description: "Custom software for DR businesses. Management systems, POS, inventory control, billing systems, DGII electronic billing integration. Fullstack developer in Santo Domingo.",
+    h1: "Custom Software for Your Business",
+    intro: "If your team still depends on spreadsheets and manual processes — you're losing time, money, and opportunities.",
+    problem: { h2: "Why your business needs custom software", p: "Off-the-shelf software forces you to adapt your business to it. Custom software adapts to your business. It grows with you and solves exactly your problems." },
+    features: [
+      "100% customized to your business",
+      "DGII electronic billing integration",
+      "Local payment gateways: Azul, CardNet, PayPal",
+      "Intuitive admin panel — manage without code",
+      "Real-time financial reports",
+      "Multi-branch and multi-user with roles",
+      "Works online and offline (PWA)",
+      "Clean, documented code",
+    ],
+    types: {
+      h2: "Software types I build",
+      items: [
+        { t: "Business Management System", d: "Inventory, billing, purchases, sales, financial reports.", p: "From $2,000" },
+        { t: "Point of Sale (POS)", d: "For restaurants, retail stores. Integrated inventory and billing.", p: "From $1,500" },
+        { t: "Admin Dashboard", d: "Real-time metrics: sales, inventory, performance, charts.", p: "From $1,000" },
+        { t: "Booking System", d: "For hotels, restaurants, beauty centers. Calendar, availability.", p: "From $1,500" },
+      ],
+    },
+    process: {
+      h2: "Development process",
+      steps: [
+        { n: "01", t: "Discovery", d: "Deep interview to understand your business and needs." },
+        { n: "02", t: "Architecture", d: "Design the system structure. You see the plan before code." },
+        { n: "03", t: "Agile dev", d: "Short development cycles. Working demos every 1-2 weeks." },
+        { n: "04", t: "Testing", d: "Full testing of functionality, security, and performance." },
+        { n: "05", t: "Launch", d: "Production deployment with training for your team." },
+        { n: "06", t: "Support", d: "Ongoing support, maintenance, and improvements." },
+      ],
+    },
+    faq: [
+      { q: "How much does a custom system cost?", a: "From $2,000 for a basic system. Detailed quote before starting." },
+      { q: "Does it include DGII electronic billing?", a: "Yes. I integrate with authorized e-CF providers for Law 32-23 compliance." },
+      { q: "How long does it take?", a: "3-4 weeks for basic systems. 2-3 months for complex ones." },
+      { q: "Can I get the source code?", a: "Yes. Full source code and documentation are delivered to you." },
+    ],
+    cta: "Ready to move beyond spreadsheets? Reach out and let's talk.",
+    keywords: "custom software DR, management system Dominican Republic, POS system",
+  },
+}[lang];
+---
+
+<Layout title={data.title} description={data.description} lang={lang}>
+  <main>
+    <section class="svc-hero">
+      <div class="container svc-hero-inner">
+        <span class="hero-label">{lang === "es" ? "SERVICIO" : "SERVICE"}</span>
+        <h1>{data.h1}</h1>
+        <p class="hero-intro">{data.intro}</p>
+        <a href={`/${lang}/#contact`} class="btn-primary">{lang === "es" ? "Solicitar presupuesto →" : "Get a quote →"}</a>
+      </div>
+    </section>
+
+    <section class="sec prob-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code p-1"><span class="fn">const</span> <span class="vn">system</span> = <span class="fn">build</span>()</div>
+        <div class="glass-code p-2"><span class="st">"custom"</span>: true</div>
+      </div>
+      <div class="container prob-inner">
+        <span class="sec-label">{lang === "es" ? "EL PROBLEMA" : "THE PROBLEM"}</span>
+        <h2 class="sec-title">{data.problem.h2}</h2>
+        <blockquote class="prob-quote">{data.problem.p}</blockquote>
+      </div>
+    </section>
+
+    <section class="sec svc-alt feat-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code f-1">✓ <span class="vn">built</span></div>
+        <div class="glass-code f-2"><span class="fn">integrate</span>()</div>
+        <div class="glass-code f-3"><span class="st">"ready"</span>: true</div>
+      </div>
+      <div class="container">
+        <span class="sec-label">{lang === "es" ? "CARACTERÍSTICAS" : "FEATURES"}</span>
+        <h2 class="sec-title">{lang === "es" ? "¿Qué incluye?" : "What's included"}</h2>
+        <div class="feat-grid">
+          {data.features.map((f, i) => (
+            <div class="feat-card">
+              <div class="feat-icon" set:html={featuresIcons[i]} />
+              <p>{f}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec type-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code t-1"><span class="kw">npm run</span> build</div>
+        <div class="glass-code t-2"><span class="vn">v1.0.0</span> released</div>
+      </div>
+      <div class="container">
+        <span class="sec-label">{lang === "es" ? "SOLUCIONES" : "SOLUTIONS"}</span>
+        <h2 class="sec-title">{data.types.h2}</h2>
+        <p class="sec-sub">{lang === "es" ? "Soluciones hechas a la medida de tu negocio" : "Tailored solutions for your business"}</p>
+        <div class="type-grid type-grid-5">
+          {data.types.items.map((item, i) => (
+            <div class="type-card">
+              <div class="type-n">{String(i + 1).padStart(2, "0")}</div>
+              <h3>{item.t}</h3>
+              <p>{item.d}</p>
+              <div class="type-footer">
+                <span class="type-price">{item.p}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec svc-alt process-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code pr-1"><span class="fn">sprint</span> 1/6</div>
+        <div class="glass-code pr-2"><span class="fn">ship</span> it</div>
+      </div>
+      <div class="container">
+        <span class="sec-label">{lang === "es" ? "PROCESO" : "PROCESS"}</span>
+        <h2 class="sec-title">{data.process.h2}</h2>
+        <div class="process-timeline">
+          <div class="timeline-line"></div>
+          {data.process.steps.map((s) => (
+            <div class="timeline-item">
+              <div class="timeline-n">{s.n}</div>
+              <div class="timeline-content">
+                <h3>{s.t}</h3>
+                <p>{s.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec faq-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code q-1">? <span class="vn">answer</span></div>
+        <div class="glass-code q-2"><span class="fn">help</span>()</div>
+      </div>
+      <div class="container faq-narrow">
+        <span class="sec-label">{lang === "es" ? "FAQ" : "FAQ"}</span>
+        <h2 class="sec-title">{lang === "es" ? "Preguntas frecuentes" : "Frequently Asked Questions"}</h2>
+        <div class="faq-list">
+          {data.faq.map((faq) => (
+            <details class="faq-item" name="svc-faq">
+              <summary>{faq.q}</summary>
+              <p>{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code c-1"><span class="kw">const</span> <span class="vn">project</span> = <span class="kw">await</span> <span class="fn">start</span>()</div>
+        <div class="glass-code c-2"><span class="fn">ready</span> = <span class="kw">true</span></div>
+      </div>
+      <div class="container" style="text-align:center;position:relative;z-index:1">
+        <p class="cta-text">{data.cta}</p>
+        <a href={`/${lang}/#contact`} class="btn-primary btn-lg">{lang === "es" ? "Hablemos por WhatsApp →" : "Let's talk →"}</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  body { background: var(--surface); }
+  .svc-hero {
+    background: var(--surface);
+    padding: 9rem 2rem 5rem; text-align: center; position: relative; overflow: hidden;
+  }
+  .svc-hero-inner { position: relative; z-index: 1; }
+  .hero-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: block; }
+  .svc-hero h1 { font-family: var(--display); font-size: clamp(2.4rem, 5vw, 3.8rem); letter-spacing: 0.04em; line-height: 1; color: var(--fg); margin-bottom: 1rem; }
+  .hero-intro { font-size: 1.05rem; line-height: 1.7; color: var(--fg-2); max-width: 600px; margin: 0 auto 2rem; }
+
+  .sec { padding: 6rem 2rem; }
+  .svc-alt { background: var(--surface); }
+
+  .prob-section { position: relative; overflow: hidden; }
+  .prob-inner { max-width: 720px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+  .prob-quote { font-size: 1.05rem; line-height: 1.85; color: var(--fg-2); text-align: left; margin-top: 1.5rem; }
+
+  .feat-section { position: relative; overflow: hidden; }
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; position: relative; z-index: 1; }
+  .feat-card { padding: 1.75rem; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .feat-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(37,99,235,0.1); border-color: var(--blue-200); }
+  .feat-icon { width: 44px; height: 44px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; transition: background 0.3s, color 0.3s; }
+  .feat-card:hover .feat-icon { background: var(--accent); color: #fff; }
+  .feat-icon :global(svg) { width: 20px; height: 20px; }
+  .feat-card p { font-size: 0.88rem; line-height: 1.65; color: var(--fg-2); margin: 0; }
+
+  .type-section { position: relative; overflow: hidden; }
+  .type-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2.5rem; position: relative; z-index: 1; }
+  .type-grid-5 { grid-template-columns: repeat(3, 1fr); }
+  .type-card { padding: 2rem; border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--surface); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; display: flex; flex-direction: column; }
+  .type-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(37,99,235,0.1); border-color: var(--blue-200); }
+  .type-n { font-family: var(--display); font-size: 1.8rem; letter-spacing: 0.08em; color: var(--accent); line-height: 1; margin-bottom: 0.75rem; opacity: 0.5; }
+  .type-card h3 { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.06em; color: var(--fg); margin-bottom: 0.5rem; }
+  .type-card p { font-size: 0.85rem; line-height: 1.7; color: var(--fg-3); margin: 0 0 1.25rem; flex: 1; }
+  .type-footer { margin-top: auto; }
+  .type-price { display: inline-block; font-size: 0.8rem; font-weight: 700; color: var(--accent); background: var(--blue-50); padding: 0.35rem 0.85rem; border-radius: 50px; transition: background 0.3s, color 0.3s; }
+  .type-card:hover .type-price { background: var(--accent); color: #fff; }
+
+  .process-section { position: relative; overflow: hidden; }
+  .process-timeline { max-width: 640px; margin: 2.5rem auto 0; position: relative; z-index: 1; }
+  .timeline-line { position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--blue-200), var(--blue-500)); }
+  .timeline-item { display: flex; gap: 1.25rem; margin-bottom: 1.5rem; position: relative; }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-n { width: 50px; height: 50px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 1rem; color: var(--accent); flex-shrink: 0; position: relative; z-index: 1; transition: background 0.3s, color 0.3s; }
+  .timeline-item:hover .timeline-n { background: var(--accent); color: #fff; }
+  .timeline-content { padding: 0.5rem 0; }
+  .timeline-content h3 { font-size: 1rem; font-weight: 700; color: var(--fg); margin-bottom: 0.25rem; }
+  .timeline-content p { font-size: 0.85rem; line-height: 1.6; color: var(--fg-3); margin: 0; }
+
+  .faq-section { position: relative; overflow: hidden; }
+  .faq-narrow { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+  .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.5rem; }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); transition: border-color 0.2s, box-shadow 0.2s; }
+  .faq-item[open] { border-color: var(--accent); box-shadow: 0 4px 16px rgba(37,99,235,0.06); }
+  .faq-item summary { padding: 1.15rem 1.5rem; font-weight: 600; font-size: 0.92rem; color: var(--fg); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: "+"; font-size: 1.2rem; color: var(--accent); transition: transform 0.25s; line-height: 1; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { padding: 0 1.5rem 1.25rem; font-size: 0.88rem; line-height: 1.75; color: var(--fg-2); margin: 0; }
+
+  .cta-section { padding: 6rem 2rem; background: var(--surface); position: relative; overflow: hidden; }
+  .cta-text { font-size: 1.2rem; line-height: 1.7; color: var(--fg-2); max-width: 600px; margin: 0 auto 2rem; }
+  .btn-lg { padding: 1rem 2.5rem; font-size: 1rem; }
+
+  .h-1 { top: 6%; left: 4%; } .h-2 { top: 12%; right: 6%; transform: rotate(3deg); } .h-4 { bottom: 22%; right: 4%; transform: rotate(-3deg); } .h-5 { top: 65%; left: 3%; opacity: 0.6; } .h-8 { bottom: 8%; left: 6%; opacity: 0.5; }
+  .p-1 { top: 18%; right: 5%; } .p-2 { bottom: 15%; left: 4%; opacity: 0.5; }
+  .f-1 { top: 10%; left: 5%; } .f-2 { top: 50%; right: 4%; transform: rotate(5deg); opacity: 0.5; } .f-3 { bottom: 8%; left: 8%; opacity: 0.4; }
+  .t-1 { bottom: 12%; right: 4%; } .t-2 { top: 8%; left: 4%; opacity: 0.5; }
+  .pr-1 { top: 10%; right: 5%; } .pr-2 { bottom: 10%; left: 5%; opacity: 0.5; transform: rotate(-5deg); }
+  .q-1 { top: 12%; right: 4%; } .q-2 { bottom: 15%; left: 4%; opacity: 0.5; }
+  .c-1 { top: 12%; left: 5%; } .c-2 { bottom: 12%; right: 5%; opacity: 0.5; }
+
+  @media (max-width: 1024px) { .glass-code { display: none; } }
+  @media (max-width: 768px) {
+    .feat-grid { grid-template-columns: 1fr 1fr; }
+    .type-grid, .type-grid-5 { grid-template-columns: 1fr; }
+    .svc-hero { padding: 7rem 1.5rem 3.5rem; }
+    .sec { padding: 4rem 1.5rem; }
+    .prob-quote { font-size: 0.95rem; padding: 1.25rem; }
+  }
+  @media (max-width: 500px) { .feat-grid { grid-template-columns: 1fr; } }
+</style>

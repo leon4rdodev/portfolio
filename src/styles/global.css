@@ -124,6 +124,7 @@ ul, ol { list-style: none; }
   color: var(--accent);
   margin-bottom: 0.75rem;
   text-align: center;
+  display: block;
 }
 
 .sec-title {

@@ -1,0 +1,117 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { languages, type Lang } from "../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const faqs = {
+  es: [
+    {
+      q: "¿Cuánto cuesta una página web en República Dominicana?",
+      a: "Depende de lo que necesites. Una landing page simple puede costar desde US$300–$600. Una página web corporativa con varias secciones, entre US$600–$1,200. Un sistema de gestión o aplicación web completa, desde US$1,500 en adelante. Cada proyecto es diferente — escríbeme y te doy un presupuesto exacto sin compromiso.",
+    },
+    {
+      q: "¿Cuánto tiempo toma desarrollar una página web?",
+      a: "Una landing page la entrego en 5–7 días. Una página web corporativa en 1–2 semanas. Un sistema de gestión o aplicación más compleja puede tomar de 3 a 8 semanas, dependiendo del alcance. Siempre te doy una fecha estimada antes de empezar.",
+    },
+    {
+      q: "¿Trabajas con facturación electrónica DGII?",
+      a: "Sí. Integro sistemas con los proveedores autorizados de e-CF (facturación electrónica) para cumplir con la Ley 32-23 en República Dominicana. Puedo conectar tu sistema de gestión, POS o aplicación web con facturación electrónica automatizada.",
+    },
+    {
+      q: "¿Aceptas pagos con Azul o CardNet?",
+      a: "Sí, integro pasarelas de pago dominicanas como Azul y CardNet, además de PayPal y Stripe para clientes internacionales. Tu página web o sistema puede aceptar pagos online desde el día uno.",
+    },
+    {
+      q: "¿Haces mantenimiento después de entregar el proyecto?",
+      a: "Sí. Ofrezco soporte y mantenimiento continuo para todos mis proyectos. Actualizaciones de seguridad, cambios de contenido, nuevas funcionalidades. Puedes contratar horas sueltas o un plan mensual según lo que necesites.",
+    },
+    {
+      q: "¿Trabajas con agencias o solo directo con clientes?",
+      a: "Ambos. Trabajo directo con dueños de negocios en RD y también con agencias que necesitan un desarrollador confiable para subcontratar proyectos. Si eres agencia, tengo disponibilidad para tomar proyectos completos o colaborar en partes específicas.",
+    },
+    {
+      q: "¿Qué tecnologías usas?",
+      a: "Next.js, Astro y NestJS son mi stack principal. TypeScript en todo el stack. PostgreSQL y MongoDB para bases de datos. Docker para entornos consistentes. Vercel para despliegue. No uso WordPress ni página armada con plantillas — todo es código escrito desde cero.",
+    },
+    {
+      q: "¿Haces diseño web también o solo desarrollo?",
+      a: "Hago ambos. Para landing pages y sitios corporativos, me encargo del diseño y desarrollo completo. Para proyectos más grandes, puedo trabajar con tu diseñador o recomendarte uno con quien ya he colaborado.",
+    },
+  ],
+  en: [
+    {
+      q: "How much does a website cost in Dominican Republic?",
+      a: "It depends on what you need. A landing page starts at $300–$600. A corporate website runs $600–$1,200. A full management system or web app starts at $1,500+. Reach out and I'll give you an exact quote.",
+    },
+    {
+      q: "How long does it take to build a website?",
+      a: "Landing pages in 5–7 days. Corporate websites in 1–2 weeks. Complex systems in 3–8 weeks depending on scope.",
+    },
+    {
+      q: "Do you work with agencies?",
+      a: "Yes. I work directly with businesses and also with agencies that need a reliable developer for subcontracting.",
+    },
+    {
+      q: "What tech stack do you use?",
+      a: "Next.js, Astro, NestJS. TypeScript throughout. PostgreSQL and MongoDB. Docker. No WordPress or templates — everything is custom code.",
+    },
+  ],
+}[lang];
+
+const pageData = {
+  es: {
+    title: "Preguntas Frecuentes | Desarrollador Web en RD",
+    description: "Respuestas a preguntas frecuentes sobre desarrollo web en República Dominicana: cuánto cuesta una página web, facturación electrónica DGII, tiempos de entrega, tecnologías y más.",
+    h1: "Preguntas Frecuentes",
+  },
+  en: {
+    title: "FAQ | Web Developer in Dominican Republic",
+    description: "Frequently asked questions about web development in DR: website costs, delivery times, technologies, and more.",
+    h1: "Frequently Asked Questions",
+  },
+}[lang];
+---
+
+<Layout title={pageData.title} description={pageData.description} lang={lang}>
+  <main class="content-page">
+    <article class="container">
+      <h1>{pageData.h1}</h1>
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <details class="faq-item" name="faq">
+            <summary>{faq.q}</summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </div>
+      <div class="content-cta">
+        <p class="faq-cta-text">{lang === "es" ? "¿No encuentras lo que buscas? Escríbeme directo:" : "Didn't find what you're looking for? Reach out:"}</p>
+        <a href={lang === "es" ? `/${lang}/#contact` : `/${lang}/#contact`} class="btn-primary">{lang === "es" ? "Hablemos →" : "Let's talk →"}</a>
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  body { background: var(--surface); }
+  .content-page { padding: 8rem 1.5rem 5rem; background: var(--surface); min-height: 100vh; }
+  article { max-width: 720px; margin: 0 auto; }
+  h1 { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.03em; margin-bottom: 2rem; color: var(--fg); }
+  .faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); transition: border-color 0.2s; }
+  .faq-item[open] { border-color: var(--accent); }
+  summary { padding: 1.25rem 1.5rem; font-weight: 600; font-size: 0.95rem; color: var(--fg); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-size: 1.2rem; color: var(--accent); transition: transform 0.2s; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { padding: 0 1.5rem 1.25rem; font-size: 0.9rem; line-height: 1.75; color: var(--fg-2); margin: 0; }
+  .faq-cta-text { font-size: 0.9rem; color: var(--fg-2); margin-bottom: 1rem; }
+  .content-cta { margin-top: 3rem; }
+</style>

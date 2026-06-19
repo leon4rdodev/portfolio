@@ -1,0 +1,582 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { languages, type Lang } from "../../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const featuresIcons = [
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+];
+
+const data = {
+  es: {
+    title: "Desarrollo Web en República Dominicana | Páginas Web Profesionales en RD",
+    description: "Desarrollo web en Santo Domingo, RD. Creo páginas web profesionales, aplicaciones web, sistemas de gestión y tiendas online. Next.js, Astro, NestJS. SEO técnico, carga rápida, diseño responsivo. Presupuesto sin compromiso.",
+    h1: "Desarrollo Web en República Dominicana",
+    intro: "Tu negocio necesita presencia digital. No cualquier página web, sino una que cargue rápido, se vea bien en cualquier dispositivo y esté optimizada para aparecer en Google cuando tus clientes en RD te busquen.",
+    problem: {
+      h2: "¿Por qué tu negocio en RD necesita una página web profesional?",
+      p: "El 80% de los consumidores en República Dominicana busca en Google antes de comprar. Si no apareces cuando te buscan, le estás vendiendo a tu competidor. Una página web profesional no es un lujo — es tu tienda abierta 24/7, tu carta de presentación digital y tu mejor vendedor.",
+    },
+    features: [
+      "Diseño responsivo — se ve perfecto en celular, tablet y computadora",
+      "Optimización SEO desde la arquitectura — Google te encuentra más fácil",
+      "Core Web Vitals en verde — carga ultrarrápida en cualquier conexión",
+      "Panel administrador — gestiona tu contenido sin saber de código",
+      "Integración con WhatsApp — tus clientes te escriben directo desde la web",
+      "Hosting en Vercel — velocidad global, seguridad y escalabilidad",
+    ],
+    types: {
+      h2: "Soluciones que ofrezco",
+      items: [
+        { t: "Landing Page", d: "Página única para campañas o lanzamientos. Ideal para captar clientes rápido. Entrega en 5–7 días.", p: "Desde US$300" },
+        { t: "Página Web Corporativa", d: "Sitio profesional con múltiples secciones: inicio, servicios, portafolio, blog, contacto. Perfecta para empresas y marcas.", p: "US$600 – $1,200" },
+        { t: "Tienda Online / E-commerce", d: "Catálogo de productos, carrito de compras, pasarela de pago (Azul, CardNet, PayPal), panel de administración y gestión de inventario.", p: "Desde US$1,500" },
+        { t: "Aplicación Web", d: "Sistema completo con base de datos, autenticación, roles de usuario y panel administrador. Para negocios que necesitan funcionalidades avanzadas.", p: "Desde US$2,000" },
+      ],
+    },
+    process: {
+      h2: "Cómo trabajo",
+      steps: [
+        { n: "01", t: "Reunión inicial", d: "Conversamos sobre tu negocio, tus objetivos y lo que necesitas. Sin presión, sin compromiso." },
+        { n: "02", t: "Propuesta y presupuesto", d: "Te envío una propuesta clara con alcance, tecnologías, tiempos y costo. Sin letra pequeña." },
+        { n: "03", t: "Desarrollo", d: "Construyo tu página con entregas periódicas para que veas el avance en tiempo real." },
+        { n: "04", t: "Revisión y ajustes", d: "Pruebas tú mismo, me dices qué ajustar y lo corrijo hasta que quede perfecto." },
+        { n: "05", t: "Despliegue", d: "Publico tu página en producción, configuro dominio y te entrego todo funcionando." },
+      ],
+    },
+    faq: [
+      { q: "¿Cuánto cuesta una página web en RD?", a: "Depende del tipo. Una landing page desde US$300, una página corporativa US$600–$1,200, una tienda online desde US$1,500. Escríbeme y te doy un presupuesto exacto para tu proyecto." },
+      { q: "¿Cuánto tiempo toma desarrollar una página web?", a: "Una landing page en 5–7 días. Una página corporativa en 1–2 semanas. Una aplicación web completa de 3 a 8 semanas según la complejidad." },
+      { q: "¿Incluye hosting y dominio?", a: "Sí. Todos mis proyectos incluyen hosting en Vercel (rápido y seguro) y configuración de dominio. Solo necesitas comprar el dominio y yo lo configuro." },
+      { q: "¿Puedo actualizar el contenido yo mismo?", a: "Sí. Si tu página necesita actualizaciones frecuentes, incluyo un panel administrador donde puedes modificar textos, imágenes y más sin saber de código." },
+      { q: "¿La página va a aparecer en Google?", a: "Sí. Todas mis páginas incluyen optimización SEO desde la arquitectura: meta tags, estructura semántica, sitemap, robots.txt y Core Web Vitals optimizados." },
+      { q: "¿Trabajas con empresas en Santo Domingo?", a: "Sí, trabajo con clientes en Santo Domingo, Santiago y todo RD. También con clientes internacionales. Todo es remoto." },
+    ],
+    cta: "¿Listo para llevar tu negocio al siguiente nivel? Escríbeme por WhatsApp y conversemos sin compromiso.",
+    keywords: "desarrollo web República Dominicana, páginas web profesionales RD, crear página web Santo Domingo, desarrollo web RD, aplicaciones web dominicanas, página web corporativa RD, tienda online RD",
+  },
+  en: {
+    title: "Web Development in Dominican Republic | Professional Websites",
+    description: "Web development in Santo Domingo, DR. Professional websites, web apps, e-commerce, and management systems. Next.js, Astro, NestJS. Fast, responsive, SEO-optimized.",
+    h1: "Web Development in Dominican Republic",
+    intro: "Your business needs a digital presence. Not just any website — one that loads fast, looks great on every device, and ranks on Google when your clients search.",
+    problem: { h2: "Why your DR business needs a professional website", p: "80% of consumers in Dominican Republic search Google before buying. If you don't show up, your competitor gets the sale. A professional website is your 24/7 storefront." },
+    features: [
+      "Responsive design — perfect on mobile, tablet, desktop",
+      "SEO optimization from the architecture",
+      "Green Core Web Vitals — blazing fast loading",
+      "Admin panel — manage content without code",
+      "WhatsApp integration — clients contact you directly",
+      "Vercel hosting — global speed and security",
+    ],
+    types: {
+      h2: "Solutions I offer",
+      items: [
+        { t: "Landing Page", d: "Single page for campaigns or launches. 5–7 day delivery.", p: "From $300" },
+        { t: "Corporate Website", d: "Multi-page professional site for businesses and brands.", p: "$600 – $1,200" },
+        { t: "E-commerce", d: "Online store with catalog, cart, payment gateway (Azul, CardNet, PayPal).", p: "From $1,500" },
+        { t: "Web Application", d: "Full system with database, authentication, roles, and admin panel.", p: "From $2,000" },
+      ],
+    },
+    process: {
+      h2: "How I work",
+      steps: [
+        { n: "01", t: "Initial meeting", d: "We discuss your business, goals, and needs. No pressure." },
+        { n: "02", t: "Proposal", d: "Clear scope, timeline, and pricing. No fine print." },
+        { n: "03", t: "Development", d: "I build your site with regular updates so you see progress." },
+        { n: "04", t: "Review & adjustments", d: "You test, give feedback, I refine until perfect." },
+        { n: "05", t: "Launch", d: "I deploy, configure your domain, and hand over a working product." },
+      ],
+    },
+    faq: [
+      { q: "How much does a website cost in DR?", a: "Landing page from $300, corporate site $600–$1,200, e-commerce from $1,500. Contact me for an exact quote." },
+      { q: "How long does it take?", a: "Landing page 5–7 days. Corporate site 1–2 weeks. Web app 3–8 weeks." },
+      { q: "Is hosting included?", a: "Yes. Vercel hosting and domain setup are included. You just buy the domain." },
+      { q: "Can I update content myself?", a: "Yes. I include an admin panel if your site needs frequent updates." },
+    ],
+    cta: "Ready to take your business online? Reach out and let's talk.",
+    keywords: "web development Dominican Republic, professional websites DR, web developer Santo Domingo",
+  },
+}[lang];
+---
+
+<Layout title={data.title} description={data.description} lang={lang}>
+  <main>
+    <section class="svc-hero">
+      <div class="container svc-hero-inner">
+        <span class="hero-label">{lang === "es" ? "SERVICIO" : "SERVICE"}</span>
+        <h1>{data.h1}</h1>
+        <p class="hero-intro">{data.intro}</p>
+        <a href={`/${lang}/#contact`} class="btn-primary">{lang === "es" ? "Solicitar presupuesto →" : "Get a quote →"}</a>
+      </div>
+    </section>
+
+    <section class="sec prob-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code p-1"><span class="fn">const</span> <span class="vn">growth</span> = <span class="kw">true</span></div>
+        <div class="glass-code p-2"><span class="vn">online</span> 24/7</div>
+      </div>
+      <div class="container prob-inner">
+        <span class="sec-label">{lang === "es" ? "EL PROBLEMA" : "THE PROBLEM"}</span>
+        <h2 class="sec-title">{data.problem.h2}</h2>
+        <blockquote class="prob-quote">{data.problem.p}</blockquote>
+      </div>
+    </section>
+
+    <section class="sec svc-alt feat-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code f-1">✓ <span class="vn">done</span></div>
+        <div class="glass-code f-2"><span class="fn">optimize</span>()</div>
+        <div class="glass-code f-3"><span class="st">"performance"</span>: <span class="st">"perfect"</span></div>
+      </div>
+      <div class="container">
+        <span class="sec-label">{lang === "es" ? "CARACTERÍSTICAS" : "FEATURES"}</span>
+        <h2 class="sec-title">{lang === "es" ? "¿Qué incluye cada proyecto?" : "What's included"}</h2>
+        <div class="feat-grid">
+          {data.features.map((f, i) => (
+            <div class="feat-card">
+              <div class="feat-icon" set:html={featuresIcons[i]} />
+              <p>{f}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec type-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code t-1"><span class="kw">npm run</span> ship</div>
+        <div class="glass-code t-2"><span class="vn">v1.0.0</span> released</div>
+      </div>
+      <div class="container">
+        <span class="sec-label">{lang === "es" ? "SOLUCIONES" : "SOLUTIONS"}</span>
+        <h2 class="sec-title">{data.types.h2}</h2>
+        <p class="sec-sub">{lang === "es" ? "Elige el tipo de página que mejor se adapte a tu negocio" : "Choose the website type that fits your business"}</p>
+        <div class="type-grid">
+          {data.types.items.map((item, i) => (
+            <div class="type-card">
+              <div class="type-n">{i === 0 ? "★" : String(i + 1).padStart(2, "0")}</div>
+              <h3>{item.t}</h3>
+              <p>{item.d}</p>
+              <div class="type-footer">
+                <span class="type-price">{item.p}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec svc-alt process-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code pr-1"><span class="fn">git commit</span> -m <span class="st">"wip"</span></div>
+        <div class="glass-code pr-2"><span class="fn">deploy</span> --prod</div>
+      </div>
+      <div class="container">
+        <span class="sec-label">{lang === "es" ? "PROCESO" : "PROCESS"}</span>
+        <h2 class="sec-title">{data.process.h2}</h2>
+        <div class="process-timeline">
+          <div class="timeline-line"></div>
+          {data.process.steps.map((s) => (
+            <div class="timeline-item">
+              <div class="timeline-n">{s.n}</div>
+              <div class="timeline-content">
+                <h3>{s.t}</h3>
+                <p>{s.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec faq-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code q-1">? <span class="vn">answer</span></div>
+        <div class="glass-code q-2"><span class="fn">help</span>()</div>
+      </div>
+      <div class="container faq-narrow">
+        <span class="sec-label">{lang === "es" ? "FAQ" : "FAQ"}</span>
+        <h2 class="sec-title">{lang === "es" ? "Preguntas frecuentes" : "Frequently Asked Questions"}</h2>
+        <div class="faq-list">
+          {data.faq.map((faq) => (
+            <details class="faq-item" name="svc-faq">
+              <summary>{faq.q}</summary>
+              <p>{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code c-1"><span class="kw">const</span> <span class="vn">project</span> = <span class="kw">await</span> <span class="fn">start</span>()</div>
+        <div class="glass-code c-2"><span class="fn">ready</span> = <span class="kw">true</span></div>
+      </div>
+      <div class="container" style="text-align:center;position:relative;z-index:1">
+        <p class="cta-text">{data.cta}</p>
+        <a href={`/${lang}/#contact`} class="btn-primary btn-lg">{lang === "es" ? "Hablemos por WhatsApp →" : "Let's talk →"}</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  body { background: var(--surface); }
+  /* ── HERO ── */
+  .svc-hero {
+    background: var(--surface);
+    padding: 9rem 2rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .svc-hero-inner { position: relative; z-index: 1; }
+  .hero-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .svc-hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--fg);
+    margin-bottom: 1rem;
+  }
+  .hero-intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--fg-2);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+
+  /* ── PROBLEM ── */
+  .prob-section {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .prob-inner { max-width: 720px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+  .prob-quote {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--fg-2);
+    text-align: left;
+    margin-top: 1.5rem;
+  }
+
+  /* ── FEATURES ── */
+  .feat-section {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .feat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .feat-card {
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .feat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(37,99,235,0.1);
+    border-color: var(--blue-200);
+  }
+  .feat-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--accent-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: background 0.3s, color 0.3s;
+  }
+  .feat-card:hover .feat-icon {
+    background: var(--accent);
+    color: #fff;
+  }
+  .feat-icon :global(svg) { width: 20px; height: 20px; }
+  .feat-card p {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--fg-2);
+    margin: 0;
+  }
+
+  /* ── TYPES ── */
+  .type-section {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .type-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .type-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(37,99,235,0.1);
+    border-color: var(--blue-200);
+  }
+  .type-n {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    opacity: 0.5;
+  }
+  .type-card h3 {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    letter-spacing: 0.06em;
+    color: var(--fg);
+    margin-bottom: 0.5rem;
+  }
+  .type-card p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--fg-3);
+    margin: 0 0 1.25rem;
+    flex: 1;
+  }
+  .type-footer { margin-top: auto; }
+  .type-price {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--blue-50);
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .type-card:hover .type-price {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* ── PROCESS ── */
+  .process-section {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .process-timeline {
+    max-width: 640px;
+    margin: 2.5rem auto 0;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-line {
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--blue-200), var(--blue-500));
+    border-radius: 2px;
+  }
+  .timeline-item {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-n {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 1rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: background 0.3s, color 0.3s;
+  }
+  .timeline-item:hover .timeline-n {
+    background: var(--accent);
+    color: #fff;
+  }
+  .timeline-content {
+    padding: 0.5rem 0;
+  }
+  .timeline-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 0.25rem;
+  }
+  .timeline-content p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--fg-3);
+    margin: 0;
+  }
+
+  /* ── FAQ ── */
+  .faq-section {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .faq-narrow { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+  .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.5rem; }
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .faq-item[open] {
+    border-color: var(--accent);
+    box-shadow: 0 4px 16px rgba(37,99,235,0.06);
+  }
+  .faq-item summary {
+    padding: 1.15rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--fg);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+";
+    font-size: 1.2rem;
+    color: var(--accent);
+    transition: transform 0.25s;
+    line-height: 1;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p {
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--fg-2);
+    margin: 0;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 6rem 2rem;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-text {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--fg-2);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+  .btn-lg { padding: 1rem 2.5rem; font-size: 1rem; }
+
+  .svc-alt {
+    background: var(--surface);
+  }
+
+  /* ── GLASS DECOR POSITIONS ── */
+  .h-1 { top: 6%; left: 4%; }
+  .h-2 { top: 12%; right: 6%; transform: rotate(3deg); }
+  .h-4 { bottom: 22%; right: 4%; transform: rotate(-3deg); }
+  .h-5 { top: 65%; left: 3%; opacity: 0.6; }
+  .h-8 { bottom: 8%; left: 6%; opacity: 0.5; }
+
+  .p-1 { top: 18%; right: 5%; }
+  .p-2 { bottom: 15%; left: 4%; opacity: 0.5; }
+
+  .f-1 { top: 10%; left: 5%; }
+  .f-2 { top: 50%; right: 4%; transform: rotate(5deg); opacity: 0.5; }
+  .f-3 { bottom: 8%; left: 8%; opacity: 0.4; }
+
+  .t-1 { bottom: 12%; right: 4%; }
+  .t-2 { top: 8%; left: 4%; opacity: 0.5; }
+
+  .pr-1 { top: 10%; right: 5%; }
+  .pr-2 { bottom: 10%; left: 5%; opacity: 0.5; transform: rotate(-5deg); }
+
+  .q-1 { top: 12%; right: 4%; }
+  .q-2 { bottom: 15%; left: 4%; opacity: 0.5; }
+
+  .c-1 { top: 12%; left: 5%; }
+  .c-2 { bottom: 12%; right: 5%; opacity: 0.5; }
+
+  @media (max-width: 1024px) {
+    .glass-code { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    .feat-grid { grid-template-columns: 1fr 1fr; }
+    .type-grid { grid-template-columns: 1fr; }
+    .svc-hero { padding: 7rem 1.5rem 3.5rem; }
+    .prob-section, .feat-section, .type-section, .process-section, .faq-section, .cta-section { padding: 4rem 1.5rem; }
+    .prob-quote { font-size: 0.95rem; padding: 1.25rem; }
+  }
+
+  @media (max-width: 500px) {
+    .feat-grid { grid-template-columns: 1fr; }
+  }
+</style>

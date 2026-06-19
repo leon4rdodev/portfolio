@@ -1,0 +1,94 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { languages, type Lang } from "../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const posts = {
+  es: [
+    {
+      title: "¿Cuánto cuesta una página web en República Dominicana?",
+      desc: "Todo lo que necesitas saber sobre precios de páginas web en RD. Desde landing pages hasta sistemas de gestión completos.",
+      slug: "cuanto-cuesta-pagina-web-rd",
+      date: "2026-06-19",
+    },
+    {
+      title: "Facturación Electrónica DGII: Lo que tu negocio en RD necesita saber",
+      desc: "La Ley 32-23 exige facturación electrónica (e-CF) en República Dominicana. Te explico cómo implementarla y cumplir con la DGII.",
+      slug: "facturacion-electronica-dgii",
+      date: "2026-06-19",
+    },
+    {
+      title: "Cómo contratar un desarrollador web en Santo Domingo",
+      desc: "Guía práctica para contratar al desarrollador web adecuado en Santo Domingo, RD. Qué preguntar, qué esperar y cuánto invertir.",
+      slug: "contratar-desarrollador-santo-domingo",
+      date: "2026-06-19",
+    },
+  ],
+  en: [
+    {
+      title: "How much does a website cost in Dominican Republic?",
+      desc: "Everything you need to know about website pricing in DR. From landing pages to full management systems.",
+      slug: "cuanto-cuesta-pagina-web-rd",
+      date: "2026-06-19",
+    },
+    {
+      title: "DGII Electronic Billing: What your DR business needs to know",
+      desc: "Law 32-23 requires electronic billing (e-CF) in Dominican Republic. How to implement it and comply with DGII.",
+      slug: "facturacion-electronica-dgii",
+      date: "2026-06-19",
+    },
+    {
+      title: "How to hire a web developer in Santo Domingo",
+      desc: "A practical guide to hiring the right web developer in Santo Domingo, DR. What to ask, what to expect, and how much to invest.",
+      slug: "contratar-desarrollador-santo-domingo",
+      date: "2026-06-19",
+    },
+  ],
+}[lang];
+
+const pageData = {
+  es: { title: "Blog | Desarrollo Web en República Dominicana", description: "Artículos sobre desarrollo web, facturación electrónica DGII, páginas web, y tecnología para negocios en República Dominicana." },
+  en: { title: "Blog | Web Development in Dominican Republic", description: "Articles about web development, DGII electronic billing, websites, and technology for businesses in Dominican Republic." },
+}[lang];
+---
+
+<Layout title={pageData.title} description={pageData.description} lang={lang}>
+  <main class="content-page">
+    <article class="container">
+      <h1>{lang === "es" ? "Blog" : "Blog"}</h1>
+      <p class="intro">{lang === "es" ? "Artículos sobre desarrollo web, tecnología y negocios digitales en República Dominicana." : "Articles about web development, technology, and digital business in Dominican Republic."}</p>
+      <div class="post-list">
+        {posts.map((post) => (
+          <a href={`/${lang}/blog/${post.slug}/`} class="post-card">
+            <time datetime={post.date}>{post.date}</time>
+            <h2>{post.title}</h2>
+            <p>{post.desc}</p>
+            <span class="post-read">{lang === "es" ? "Leer artículo →" : "Read article →"}</span>
+          </a>
+        ))}
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  body { background: var(--surface); }
+  .content-page { padding: 8rem 1.5rem 5rem; background: var(--surface); min-height: 100vh; }
+  article { max-width: 720px; margin: 0 auto; }
+  h1 { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.03em; margin-bottom: 1rem; color: var(--fg); }
+  .intro { font-size: 1rem; color: var(--fg-2); margin-bottom: 3rem; }
+  .post-list { display: flex; flex-direction: column; gap: 1.25rem; }
+  .post-card { display: block; padding: 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+  .post-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.08); }
+  time { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-3); }
+  .post-card h2 { font-size: 1.15rem; font-weight: 700; color: var(--fg); margin: 0.5rem 0; }
+  .post-card p { font-size: 0.85rem; line-height: 1.6; color: var(--fg-2); margin: 0; }
+  .post-read { font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-top: 0.75rem; display: inline-block; }
+</style>

@@ -1,0 +1,85 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { languages, type Lang } from "../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const data = {
+  es: {
+    title: "Desarrollador Web en Santo Domingo | Fullstack RD",
+    description: "Desarrollador web en Santo Domingo, República Dominicana. Fullstack especializado en Next.js, NestJS y Astro. Creo páginas web, sistemas de gestión, landing pages y APIs para negocios en Santo Domingo y todo RD.",
+    h1: "Desarrollador Web en Santo Domingo",
+    intro: "Si estás en Santo Domingo y necesitas una página web, un sistema de gestión, o una API para tu negocio — soy desarrollador fullstack y trabajo remoto desde la capital. Sin intermediarios, sin agencias. Hablo directo contigo.",
+    sections: [
+      {
+        h2: "¿Por qué contratar un desarrollador local en Santo Domingo?",
+        p: "Conozco el mercado dominicano. Sé cómo funciona la facturación electrónica DGII, qué pasarelas de pago usamos (Azul, CardNet), y cuáles son las necesidades reales de los negocios en RD. No necesito que me expliques cómo funciona el país porque ya lo sé.",
+      },
+      {
+        h2: "Servicios para negocios en Santo Domingo",
+        p: "Páginas web profesionales para empresas y emprendedores. Landing pages optimizadas para captar clientes en RD. Sistemas de gestión con inventario, facturación y reportes. APIs y backend con integración a facturación electrónica DGII. Punto de venta (POS) para restaurantes y tiendas.",
+      },
+      {
+        h2: "Trabajo remoto desde Santo Domingo",
+        p: "Vivo y trabajo desde Santo Domingo. Esto significa que puedo reunirme contigo cuando necesites, entender tu negocio en el contexto local, y entregar resultados sin que tengas que pagar precios de agencia. Trabajo con clientes en todo RD y también internacionalmente.",
+      },
+    ],
+    cta: "¿Estás en Santo Domingo y necesitas un desarrollador? Escríbeme por WhatsApp y hablemos.",
+    keywords: "desarrollador web Santo Domingo, programador web RD, crear página web Santo Domingo, desarrollador fullstack República Dominicana, sistemas de gestión Santo Domingo",
+  },
+  en: {
+    title: "Web Developer in Santo Domingo | Fullstack DR",
+    description: "Web developer in Santo Domingo, Dominican Republic. Fullstack specialist in Next.js, NestJS, and Astro. Websites, management systems, landing pages, and APIs for DR businesses.",
+    h1: "Web Developer in Santo Domingo",
+    intro: "Based in Santo Domingo, I build websites, management systems, and APIs for local and international clients. Direct communication, no middlemen, no agencies.",
+    sections: [
+      {
+        h2: "Why hire a local developer in Santo Domingo?",
+        p: "I know the Dominican market. DGII electronic billing, local payment gateways (Azul, CardNet), and the real needs of DR businesses. No need to explain how things work here — I already know.",
+      },
+      {
+        h2: "Services for Santo Domingo businesses",
+        p: "Professional websites, high-converting landing pages, management systems with inventory and billing, APIs and backend with DGII integration, POS systems for restaurants and retail.",
+      },
+    ],
+    cta: "In Santo Domingo and need a developer? Reach out and let's talk.",
+    keywords: "web developer Santo Domingo, fullstack developer DR, website Santo Domingo",
+  },
+}[lang];
+---
+
+<Layout title={data.title} description={data.description} lang={lang}>
+  <main class="content-page">
+    <article class="container">
+      <h1>{data.h1}</h1>
+      <p class="intro">{data.intro}</p>
+      {data.sections.map((s) => (
+        <section>
+          <h2>{s.h2}</h2>
+          <p>{s.p}</p>
+        </section>
+      ))}
+      <div class="content-cta">
+        <a href={lang === "es" ? `/${lang}/#contact` : `/${lang}/#contact`} class="btn-primary">{lang === "es" ? "Hablemos →" : "Let's talk →"}</a>
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  body { background: var(--surface); }
+  .content-page { padding: 8rem 1.5rem 5rem; background: var(--surface); min-height: 100vh; }
+  article { max-width: 720px; margin: 0 auto; }
+  h1 { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.03em; margin-bottom: 1.5rem; color: var(--fg); }
+  .intro { font-size: 1.1rem; line-height: 1.8; color: var(--fg-2); margin-bottom: 3rem; }
+  section { margin-bottom: 2.5rem; }
+  h2 { font-size: 1.3rem; font-weight: 700; color: var(--fg); margin-bottom: 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; color: var(--fg-2); }
+  .content-cta { margin-top: 3rem; }
+</style>

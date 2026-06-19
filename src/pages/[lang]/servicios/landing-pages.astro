@@ -1,0 +1,444 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { languages, type Lang } from "../../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const featuresIcons = [
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+];
+
+const benefitsIcons = [
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+];
+
+const data = {
+  es: {
+    title: "Landing Pages Profesionales en RD | Páginas que Convierten",
+    description: "Landing pages profesionales en República Dominicana. Creo páginas optimizadas para convertir visitantes en clientes. SEO, velocidad y diseño. Entrega rápida en 5–7 días. Presupuesto sin compromiso.",
+    h1: "Landing Pages que Venden",
+    intro: "Una landing page no es una página web cualquiera. Es la puerta de entrada de tu negocio en internet. Si es lenta, fea o no convence, el cliente se va antes de leer la primera línea. Yo construyo landing pages diseñadas para convertir.",
+    problem: {
+      h2: "¿Por qué tu negocio en RD necesita una landing page?",
+      p: "En República Dominicana, la mayoría de tus clientes te encontrarán primero por el celular. Si tu página tarda más de 3 segundos en cargar, el 53% de los visitantes se van. Una landing page optimizada no solo se ve profesional — convierte visitantes en clientes reales.",
+    },
+    features: [
+      "Carga en menos de 2 segundos — en cualquier conexión",
+      "Diseño responsivo — perfecta en celulares (donde están tus clientes en RD)",
+      "SEO técnico resuelto desde la arquitectura — Google te encuentra",
+      "Copy persuasivo que guía al visitante a tomar acción",
+      "Formulario de contacto + integración con WhatsApp",
+      "Core Web Vitals en verde desde el primer deploy",
+    ],
+    benefits: [
+      { t: "Velocidad", d: "Carga en menos de 2 segundos. En RD, donde las conexiones varían, esto marca la diferencia entre un cliente y un rebote." },
+      { t: "Conversión", d: "Cada elemento está diseñado para guiar al visitante hacia la acción: comprar, llamar, escribir." },
+      { t: "Profesionalismo", d: "Una landing bien diseñada transmite confianza. Tus clientes potenciales te toman en serio desde el primer clic." },
+      { t: "Resultados medibles", d: "Integro Google Analytics para que sepas exactamente cuántas personas visitan y convierten." },
+    ],
+    types: {
+      h2: "Tipos de landing pages",
+      items: [
+        { t: "Landing para campañas", d: "Perfecta para lanzamientos, promociones o campañas de Google Ads / Facebook. Una página enfocada en una sola acción.", p: "Desde US$300" },
+        { t: "Landing para negocio local", d: "Para negocios en Santo Domingo o RD que quieren captar clientes locales. Con SEO local, mapa, WhatsApp y reseñas.", p: "US$400 – $700" },
+        { t: "Landing para producto/servicio", d: "Presenta tu producto o servicio con secciones detalladas, testimonios, precios y llamado a la acción múltiple.", p: "US$500 – $900" },
+        { t: "Landing con blog integrado", d: "Landing principal + blog para captar tráfico orgánico. Ideal para negocios que quieren posicionarse en Google a largo plazo.", p: "Desde US$800" },
+      ],
+    },
+    process: {
+      h2: "Mi proceso en 5 días",
+      steps: [
+        { n: "D1", t: "Brief", d: "Me cuentas sobre tu negocio, tu cliente ideal y qué acción quieres que tomen." },
+        { n: "D2", t: "Diseño", d: "Comparto contigo el diseño de la landing para que la apruebes antes de escribir código." },
+        { n: "D3", t: "Desarrollo", d: "Construyo la página con Astro — carga instantánea, SEO listo, diseño responsivo." },
+        { n: "D4", t: "Revisión", d: "Te envío un enlace para que pruebes y me digas qué ajustar." },
+        { n: "D5", t: "Publicación", d: "Despliego en producción, configuro dominio y está lista para recibir visitas." },
+      ],
+    },
+    faq: [
+      { q: "¿Cuánto cuesta una landing page en RD?", a: "Desde US$300 para una landing simple. El precio depende de las secciones y funcionalidades. Escríbeme y te doy un presupuesto exacto." },
+      { q: "¿En cuánto tiempo la tienes lista?", a: "En 5 a 7 días hábiles tu landing page está en producción. Soy rápido porque uso tecnologías modernas (Astro, Next.js) que aceleran el desarrollo." },
+      { q: "¿Puedo tenerla en mi propio dominio?", a: "Sí. Trabajo con tu dominio o te ayudo a conseguir uno. La página se despliega en Vercel con tu dominio personalizado." },
+      { q: "¿La landing page va a aparecer en Google?", a: "Sí. Todas mis landing pages incluyen SEO básico: meta tags, estructura semántica, sitemap, y optimización de velocidad que Google premia en el ranking." },
+      { q: "¿Puedo actualizarla yo después?", a: "Sí. Si necesitas hacer cambios frecuentes, puedo incluir un panel simple donde modifiques textos e imágenes." },
+    ],
+    cta: "¿Listo para tu landing page? Escríbeme por WhatsApp y arrancamos en los próximos días.",
+    keywords: "landing pages RD, diseño web República Dominicana, página de ventas Santo Domingo, landing page profesional RD, crear landing page RD",
+  },
+  en: {
+    title: "Professional Landing Pages | High-Converting Web Design",
+    description: "Professional landing pages built with Astro and Next.js. Fast loading, SEO-optimized, mobile-first. Delivered in 5–7 days.",
+    h1: "Landing Pages that Convert",
+    intro: "A landing page is your business's front door. If it's slow or unconvincing, visitors leave before reading the first line.",
+    problem: { h2: "Why your business needs a landing page", p: "53% of mobile users leave if a page takes over 3 seconds to load. An optimized landing page converts visitors into customers." },
+    features: [
+      "Loads in under 2 seconds",
+      "Mobile-first responsive design",
+      "Technical SEO built-in",
+      "Persuasive copy that drives action",
+      "WhatsApp and contact form integration",
+      "Green Core Web Vitals from day one",
+    ],
+    benefits: [
+      { t: "Speed", d: "Loads in under 2 seconds. Every second counts." },
+      { t: "Conversion", d: "Every element guides visitors to take action." },
+      { t: "Professionalism", d: "A well-designed landing page builds trust instantly." },
+      { t: "Measurable", d: "Google Analytics integrated to track performance." },
+    ],
+    types: {
+      h2: "Landing page types",
+      items: [
+        { t: "Campaign Landing Page", d: "For launches, promotions, or ad campaigns. Single focused action.", p: "From $300" },
+        { t: "Local Business Landing Page", d: "For DR local businesses. Local SEO, map, WhatsApp integration.", p: "$400 – $700" },
+        { t: "Product/Service Landing Page", d: "Detailed sections, testimonials, pricing, multiple CTAs.", p: "$500 – $900" },
+        { t: "Landing + Blog", d: "Main landing with blog for organic traffic. Long-term SEO strategy.", p: "From $800" },
+      ],
+    },
+    process: {
+      h2: "5-day process",
+      steps: [
+        { n: "D1", t: "Brief", d: "You tell me about your business and goals." },
+        { n: "D2", t: "Design", d: "I share the design for your approval." },
+        { n: "D3", t: "Development", d: "I build it with Astro — fast, SEO-ready, responsive." },
+        { n: "D4", t: "Review", d: "You test and give feedback." },
+        { n: "D5", t: "Launch", d: "Deployed to production with your domain." },
+      ],
+    },
+    faq: [
+      { q: "How much does a landing page cost?", a: "From $300 for a simple landing. Contact me for a quote." },
+      { q: "How long does it take?", a: "5–7 business days. Fast delivery with modern tech." },
+      { q: "Can I use my own domain?", a: "Yes. I work with your domain or help you get one." },
+      { q: "Will it rank on Google?", a: "Yes. Basic SEO included: meta tags, semantic structure, speed optimization." },
+    ],
+    cta: "Ready for your landing page? Reach out and let's start.",
+    keywords: "landing pages, professional landing page, high-converting landing page",
+  },
+}[lang];
+---
+
+<Layout title={data.title} description={data.description} lang={lang}>
+  <main>
+    <section class="svc-hero">
+      <div class="container svc-hero-inner">
+        <span class="hero-label">{lang === "es" ? "SERVICIO" : "SERVICE"}</span>
+        <h1>{data.h1}</h1>
+        <p class="hero-intro">{data.intro}</p>
+        <a href={`/${lang}/#contact`} class="btn-primary">{lang === "es" ? "Solicitar presupuesto →" : "Get a quote →"}</a>
+      </div>
+    </section>
+
+    <section class="sec prob-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code p-1"><span class="fn">const</span> <span class="vn">traffic</span> = <span class="fn">grow</span>()</div>
+        <div class="glass-code p-2"><span class="st">"conversion"</span>: up</div>
+      </div>
+      <div class="container prob-inner">
+        <span class="sec-label">{lang === "es" ? "EL PROBLEMA" : "THE PROBLEM"}</span>
+        <h2 class="sec-title">{data.problem.h2}</h2>
+        <blockquote class="prob-quote">{data.problem.p}</blockquote>
+      </div>
+    </section>
+
+    <section class="sec svc-alt feat-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code f-1">✓ <span class="vn">optimized</span></div>
+        <div class="glass-code f-2"><span class="fn">lighthouse</span> 100</div>
+        <div class="glass-code f-3"><span class="st">"mobile"</span>: <span class="st">"ready"</span></div>
+      </div>
+      <div class="container">
+        <span class="sec-label">{lang === "es" ? "CARACTERÍSTICAS" : "FEATURES"}</span>
+        <h2 class="sec-title">{lang === "es" ? "Características" : "Features"}</h2>
+        <div class="feat-grid">
+          {data.features.map((f, i) => (
+            <div class="feat-card">
+              <div class="feat-icon" set:html={featuresIcons[i]} />
+              <p>{f}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec type-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code t-1"><span class="fn">launch</span> ready</div>
+        <div class="glass-code t-2"><span class="vn">v2.0</span> deployed</div>
+      </div>
+      <div class="container">
+        <span class="sec-label">{lang === "es" ? "BENEFICIOS" : "BENEFITS"}</span>
+        <h2 class="sec-title">{lang === "es" ? "Lo que obtienes" : "What you get"}</h2>
+        <div class="benefit-grid">
+          {data.benefits.map((b, i) => (
+            <div class="benefit-card">
+              <div class="benefit-icon" set:html={benefitsIcons[i]} />
+              <h3>{b.t}</h3>
+              <p>{b.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec svc-alt process-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code pr-1"><span class="fn">design</span> → <span class="fn">dev</span></div>
+        <div class="glass-code pr-2"><span class="fn">deploy</span> --fast</div>
+      </div>
+      <div class="container">
+        <span class="sec-label">{lang === "es" ? "PROCESO" : "PROCESS"}</span>
+        <h2 class="sec-title">{data.process.h2}</h2>
+        <div class="process-timeline">
+          <div class="timeline-line"></div>
+          {data.process.steps.map((s) => (
+            <div class="timeline-item">
+              <div class="timeline-n">{s.n}</div>
+              <div class="timeline-content">
+                <h3>{s.t}</h3>
+                <p>{s.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec faq-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code q-1">? <span class="vn">answer</span></div>
+        <div class="glass-code q-2"><span class="fn">help</span>()</div>
+      </div>
+      <div class="container faq-narrow">
+        <span class="sec-label">{lang === "es" ? "FAQ" : "FAQ"}</span>
+        <h2 class="sec-title">{lang === "es" ? "Preguntas frecuentes" : "Frequently Asked Questions"}</h2>
+        <div class="faq-list">
+          {data.faq.map((faq) => (
+            <details class="faq-item" name="svc-faq">
+              <summary>{faq.q}</summary>
+              <p>{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="section-decor" aria-hidden="true">
+        <div class="glass-code c-1"><span class="kw">const</span> <span class="vn">project</span> = <span class="kw">await</span> <span class="fn">start</span>()</div>
+        <div class="glass-code c-2"><span class="fn">ready</span> = <span class="kw">true</span></div>
+      </div>
+      <div class="container" style="text-align:center;position:relative;z-index:1">
+        <p class="cta-text">{data.cta}</p>
+        <a href={`/${lang}/#contact`} class="btn-primary btn-lg">{lang === "es" ? "Hablemos por WhatsApp →" : "Let's talk →"}</a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  body { background: var(--surface); }
+  .svc-hero {
+    background: var(--surface);
+    padding: 9rem 2rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .svc-hero-inner { position: relative; z-index: 1; }
+  .hero-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: block;
+  }
+  .svc-hero h1 {
+    font-family: var(--display); font-size: clamp(2.4rem, 5vw, 3.8rem);
+    letter-spacing: 0.04em; line-height: 1; color: var(--fg); margin-bottom: 1rem;
+  }
+  .hero-intro {
+    font-size: 1.05rem; line-height: 1.7; color: var(--fg-2);
+    max-width: 600px; margin: 0 auto 2rem;
+  }
+
+  .sec { padding: 6rem 2rem; }
+  .svc-alt { background: var(--surface); }
+
+  .prob-section { position: relative; overflow: hidden; }
+  .prob-inner { max-width: 720px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+  .prob-quote {
+    font-size: 1.05rem; line-height: 1.85; color: var(--fg-2);
+    text-align: left; margin-top: 1.5rem;
+  }
+
+  .feat-section { position: relative; overflow: hidden; }
+  .feat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem; margin-top: 2.5rem; position: relative; z-index: 1;
+  }
+  .feat-card {
+    padding: 1.75rem; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); background: var(--surface);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem;
+  }
+  .feat-card:hover {
+    transform: translateY(-6px); box-shadow: 0 16px 40px rgba(37,99,235,0.1);
+    border-color: var(--blue-200);
+  }
+  .feat-icon {
+    width: 44px; height: 44px; background: var(--accent-light);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    color: var(--accent); flex-shrink: 0; transition: background 0.3s, color 0.3s;
+  }
+  .feat-card:hover .feat-icon { background: var(--accent); color: #fff; }
+  .feat-icon :global(svg) { width: 20px; height: 20px; }
+  .feat-card p { font-size: 0.88rem; line-height: 1.65; color: var(--fg-2); margin: 0; }
+
+  .type-section { position: relative; overflow: hidden; }
+  .benefit-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem; margin-top: 2.5rem; position: relative; z-index: 1;
+  }
+  .benefit-card {
+    padding: 1.75rem; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); background: var(--surface);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+  .benefit-card:hover {
+    transform: translateY(-6px); box-shadow: 0 16px 40px rgba(37,99,235,0.1);
+    border-color: var(--blue-200);
+  }
+  .benefit-icon {
+    width: 44px; height: 44px; background: var(--accent-light);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    color: var(--accent); margin-bottom: 1rem; transition: background 0.3s, color 0.3s;
+  }
+  .benefit-card:hover .benefit-icon { background: var(--accent); color: #fff; }
+  .benefit-icon :global(svg) { width: 20px; height: 20px; }
+  .benefit-card h3 { font-weight: 700; font-size: 1rem; color: var(--fg); margin-bottom: 0.4rem; }
+  .benefit-card p { font-size: 0.85rem; line-height: 1.7; color: var(--fg-3); margin: 0; }
+
+  .type-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem; margin-top: 2.5rem; position: relative; z-index: 1;
+  }
+  .type-card {
+    padding: 2rem; border: 1px solid var(--border);
+    border-radius: var(--radius-xl); background: var(--surface);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex; flex-direction: column;
+  }
+  .type-card:hover {
+    transform: translateY(-6px); box-shadow: 0 20px 48px rgba(37,99,235,0.1);
+    border-color: var(--blue-200);
+  }
+  .type-n {
+    font-family: var(--display); font-size: 1.8rem; letter-spacing: 0.08em;
+    color: var(--accent); line-height: 1; margin-bottom: 0.75rem; opacity: 0.5;
+  }
+  .type-card h3 {
+    font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.06em;
+    color: var(--fg); margin-bottom: 0.5rem;
+  }
+  .type-card p { font-size: 0.85rem; line-height: 1.7; color: var(--fg-3); margin: 0 0 1.25rem; flex: 1; }
+  .type-footer { margin-top: auto; }
+  .type-price {
+    display: inline-block; font-size: 0.8rem; font-weight: 700;
+    color: var(--accent); background: var(--blue-50);
+    padding: 0.35rem 0.85rem; border-radius: 50px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .type-card:hover .type-price { background: var(--accent); color: #fff; }
+
+  .process-section { position: relative; overflow: hidden; }
+  .process-timeline { max-width: 640px; margin: 2.5rem auto 0; position: relative; z-index: 1; }
+  .timeline-line {
+    position: absolute; left: 24px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--blue-200), var(--blue-500));
+  }
+  .timeline-item { display: flex; gap: 1.25rem; margin-bottom: 1.5rem; position: relative; }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-n {
+    width: 50px; height: 50px; border-radius: 50%; background: var(--surface);
+    border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-size: 1rem; color: var(--accent);
+    flex-shrink: 0; position: relative; z-index: 1;
+    transition: background 0.3s, color 0.3s;
+  }
+  .timeline-item:hover .timeline-n { background: var(--accent); color: #fff; }
+  .timeline-content { padding: 0.5rem 0; }
+  .timeline-content h3 { font-size: 1rem; font-weight: 700; color: var(--fg); margin-bottom: 0.25rem; }
+  .timeline-content p { font-size: 0.85rem; line-height: 1.6; color: var(--fg-3); margin: 0; }
+
+  .faq-section { position: relative; overflow: hidden; }
+  .faq-narrow { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+  .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.5rem; }
+  .faq-item {
+    border: 1px solid var(--border); border-radius: var(--radius-lg);
+    overflow: hidden; background: var(--surface); transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .faq-item[open] { border-color: var(--accent); box-shadow: 0 4px 16px rgba(37,99,235,0.06); }
+  .faq-item summary {
+    padding: 1.15rem 1.5rem; font-weight: 600; font-size: 0.92rem;
+    color: var(--fg); cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+"; font-size: 1.2rem; color: var(--accent);
+    transition: transform 0.25s; line-height: 1;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { padding: 0 1.5rem 1.25rem; font-size: 0.88rem; line-height: 1.75; color: var(--fg-2); margin: 0; }
+
+  .cta-section {
+    padding: 6rem 2rem;
+    background: var(--surface);
+    position: relative; overflow: hidden;
+  }
+  .cta-text {
+    font-size: 1.2rem; line-height: 1.7; color: var(--fg-2);
+    max-width: 600px; margin: 0 auto 2rem;
+  }
+  .btn-lg { padding: 1rem 2.5rem; font-size: 1rem; }
+
+  .h-1 { top: 6%; left: 4%; }
+  .h-2 { top: 12%; right: 6%; transform: rotate(3deg); }
+  .h-4 { bottom: 22%; right: 4%; transform: rotate(-3deg); }
+  .h-5 { top: 65%; left: 3%; opacity: 0.6; }
+  .h-8 { bottom: 8%; left: 6%; opacity: 0.5; }
+  .p-1 { top: 18%; right: 5%; }
+  .p-2 { bottom: 15%; left: 4%; opacity: 0.5; }
+  .f-1 { top: 10%; left: 5%; }
+  .f-2 { top: 50%; right: 4%; transform: rotate(5deg); opacity: 0.5; }
+  .f-3 { bottom: 8%; left: 8%; opacity: 0.4; }
+  .t-1 { bottom: 12%; right: 4%; }
+  .t-2 { top: 8%; left: 4%; opacity: 0.5; }
+  .pr-1 { top: 10%; right: 5%; }
+  .pr-2 { bottom: 10%; left: 5%; opacity: 0.5; transform: rotate(-5deg); }
+  .q-1 { top: 12%; right: 4%; }
+  .q-2 { bottom: 15%; left: 4%; opacity: 0.5; }
+  .c-1 { top: 12%; left: 5%; }
+  .c-2 { bottom: 12%; right: 5%; opacity: 0.5; }
+
+  @media (max-width: 1024px) { .glass-code { display: none; } }
+  @media (max-width: 768px) {
+    .feat-grid, .benefit-grid { grid-template-columns: 1fr 1fr; }
+    .type-grid { grid-template-columns: 1fr; }
+    .svc-hero { padding: 7rem 1.5rem 3.5rem; }
+    .sec { padding: 4rem 1.5rem; }
+    .prob-quote { font-size: 0.95rem; padding: 1.25rem; }
+  }
+  @media (max-width: 500px) { .feat-grid, .benefit-grid { grid-template-columns: 1fr; } }
+</style>

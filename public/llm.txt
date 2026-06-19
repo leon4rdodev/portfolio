@@ -1,8 +1,33 @@
 # Leon4rdoDev - Portfolio
 
 ## About
-Backend developer portfolio by Leonardo, showcasing projects and services in web development.
+Backend developer portfolio by Leonardo, showcasing projects and services in web development, based in Santo Domingo, Dominican Republic.
 
 ## Pages
-- /en/ - English portfolio
-- /es/ - Spanish portfolio (Español)
+- /en/ - English portfolio homepage
+- /es/ - Spanish portfolio homepage (Español)
+- /es/servicios/desarrollo-web/ - Desarrollo web profesional en RD
+- /en/servicios/desarrollo-web/ - Web development services
+- /es/servicios/landing-pages/ - Landing pages profesionales
+- /en/servicios/landing-pages/ - Landing page design & development
+- /es/servicios/software-a-medida/ - Software a medida
+- /en/servicios/software-a-medida/ - Custom software development
+- /es/servicios/apis-backend/ - APIs y backend
+- /en/servicios/apis-backend/ - API & backend development
+- /es/blog/ - Blog de tecnología y desarrollo web (español)
+- /en/blog/ - Tech & web development blog (english)
+- /es/blog/cuanto-cuesta-pagina-web-rd/ - ¿Cuánto cuesta una página web en RD?
+- /en/blog/cuanto-cuesta-pagina-web-rd/ - How much does a website cost in DR?
+- /es/blog/facturacion-electronica-dgii/ - Facturación electrónica DGII
+- /en/blog/facturacion-electronica-dgii/ - DGII electronic invoicing guide
+- /es/blog/contratar-desarrollador-santo-domingo/ - Contratar desarrollador en Santo Domingo
+- /en/blog/contratar-desarrollador-santo-domingo/ - Hire a developer in Santo Domingo
+- /es/faq/ - Preguntas frecuentes
+- /en/faq/ - Frequently asked questions
+- /es/santo-domingo/ - Desarrollo web en Santo Domingo
+- /en/santo-domingo/ - Web development in Santo Domingo
+
+## Tech Stack
+- Astro 5 (static site)
+- Spanish (es) & English (en) with astro:i18n
+- Deployed on Vercel

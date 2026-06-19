@@ -1,0 +1,97 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { languages, type Lang } from "../../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const data = {
+  es: {
+    title: "Facturación Electrónica DGII en RD | Lo que tu negocio necesita saber",
+    description: "Guía completa sobre la facturación electrónica (e-CF) en República Dominicana. Ley 32-23, requisitos, plazos, proveedores autorizados y cómo implementarlo en tu negocio.",
+    h1: "Facturación Electrónica DGII: Lo que tu negocio en RD necesita saber",
+    date: "19 junio, 2026",
+    sections: [
+      {
+        h2: "¿Qué es la facturación electrónica (e-CF)?",
+        p: "El e-CF (Comprobante Fiscal Electrónico) es la versión digital de las facturas, NCF y otros comprobantes fiscales. La DGII (Dirección General de Impuestos Internos) estableció mediante la Ley 32-23 que todas las empresas en República Dominicana deben emitir facturas electrónicas. Ya no se trata de una opción — es obligatorio.",
+      },
+      {
+        h2: "¿Cuándo es obligatorio?",
+        p: "La implementación es gradual. Las grandes empresas ya están en proceso. Para las pequeñas y medianas empresas (PYMES), los plazos se están acercando rápidamente. Si tu negocio en RD aún no ha implementado facturación electrónica, es momento de empezar. La fecha límite para muchos sectores es noviembre de 2026.",
+      },
+      {
+        h2: "¿Cómo implementar facturación electrónica en tu negocio?",
+        p: "Hay dos caminos: usar un proveedor de facturación electrónica (como Alanube, Csuite, etc.) que ofrece su plataforma, o integrar la facturación directamente en tu sistema de gestión existente. La segunda opción es más eficiente si ya tienes un sistema POS, ERP o de gestión, porque la facturación se genera automáticamente desde tus ventas.",
+      },
+      {
+        h2: "Integración de facturación electrónica con tu sistema",
+        p: "Como desarrollador fullstack, puedo integrar la facturación electrónica DGII directamente en tu sistema de gestión, POS o aplicación web. Esto significa que cuando hagas una venta, el comprobante fiscal se genera automáticamente y se envía al cliente por email o WhatsApp, sin que tengas que hacer nada manualmente.",
+      },
+      {
+        h2: "Beneficios de la facturación electrónica",
+        p: "Automatización de procesos, reducción de errores, cumplimiento fiscal sin estrés, ahorro de papel, y la tranquilidad de saber que estás al día con la DGII. Además, tus clientes aprecian recibir sus facturas digitales de forma inmediata.",
+      },
+    ],
+    cta: "¿Necesitas integrar facturación electrónica en tu sistema? Escríbeme y te cuento cómo puedo ayudarte.",
+    keywords: "facturación electrónica DGII, e-CF República Dominicana, Ley 32-23, comprobante fiscal electrónico RD, facturación electrónica para negocios",
+  },
+  en: {
+    title: "DGII Electronic Billing in DR | What your business needs to know",
+    description: "Complete guide to electronic billing (e-CF) in Dominican Republic. Law 32-23, requirements, deadlines, and how to implement it in your business.",
+    h1: "DGII Electronic Billing: What your DR business needs to know",
+    date: "June 19, 2026",
+    sections: [
+      {
+        h2: "What is electronic billing (e-CF)?",
+        p: "e-CF (Electronic Fiscal Receipt) is the digital version of invoices and tax receipts. Law 32-23 mandates all businesses in Dominican Republic to issue electronic invoices. It's no longer optional — it's mandatory.",
+      },
+      {
+        h2: "When is it mandatory?",
+        p: "Implementation is gradual. Large companies are already in process. For SMEs, deadlines are approaching fast. If your DR business hasn't implemented electronic billing yet, now is the time.",
+      },
+      {
+        h2: "Integration with your system",
+        p: "I can integrate DGII electronic billing directly into your management system, POS, or web app. When you make a sale, the tax receipt is automatically generated and sent to the customer.",
+      },
+    ],
+    cta: "Need electronic billing integration? Let's talk.",
+    keywords: "DGII electronic billing, e-CF Dominican Republic, Law 32-23, electronic tax receipt DR",
+  },
+}[lang];
+---
+
+<Layout title={data.title} description={data.description} lang={lang}>
+  <main class="content-page">
+    <article class="container">
+      <time class="post-date">{data.date}</time>
+      <h1>{data.h1}</h1>
+      {data.sections.map((s) => (
+        <section>
+          <h2>{s.h2}</h2>
+          <p>{s.p}</p>
+        </section>
+      ))}
+      <div class="content-cta">
+        <a href={`/${lang}/#contact`} class="btn-primary">{lang === "es" ? "¿Necesitas integrar facturación electrónica? →" : "Need electronic billing? →"}</a>
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  body { background: var(--surface); }
+  .content-page { padding: 8rem 1.5rem 5rem; background: var(--surface); min-height: 100vh; }
+  article { max-width: 720px; margin: 0 auto; }
+  .post-date { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-3); }
+  h1 { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.03em; margin: 1rem 0 2rem; color: var(--fg); }
+  section { margin-bottom: 2.5rem; }
+  h2 { font-size: 1.3rem; font-weight: 700; color: var(--fg); margin-bottom: 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.85; color: var(--fg-2); }
+  .content-cta { margin-top: 3rem; }
+</style>

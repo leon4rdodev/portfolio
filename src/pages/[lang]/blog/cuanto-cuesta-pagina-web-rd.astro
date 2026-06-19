@@ -1,0 +1,113 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { languages, type Lang } from "../../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const data = {
+  es: {
+    title: "¿Cuánto cuesta una página web en República Dominicana? | Guía 2026",
+    description: "Guía completa de precios para páginas web en RD. ¿Cuánto cuesta una landing page, un sitio corporativo o un sistema de gestión? Precios actualizados 2026 para negocios dominicanos.",
+    h1: "¿Cuánto cuesta una página web en República Dominicana?",
+    date: "19 junio, 2026",
+    sections: [
+      {
+        h2: "¿Por qué los precios varían tanto?",
+        p: "El precio de una página web en RD puede ir desde RD$15,000 hasta RD$500,000+. La diferencia no es arbitraria: depende del tipo de página, las funcionalidades, el diseño, y el nivel de personalización. Una landing page simple no cuesta lo mismo que un sistema de gestión con facturación electrónica integrada.",
+      },
+      {
+        h2: "Landing Page: desde US$300",
+        p: "Una landing page es una página única diseñada para convertir visitantes en clientes. Ideal para campañas de marketing, lanzamientos de productos o negocios que quieren una presencia web rápida y efectiva. Incluye diseño responsivo, optimización SEO, formulario de contacto e integración con WhatsApp. Entrega en 5–7 días.",
+      },
+      {
+        h2: "Página web corporativa: US$600–$1,200",
+        p: "Un sitio web profesional con varias secciones: inicio, sobre nosotros, servicios, portafolio, blog, contacto. Diseño personalizado, optimización SEO completa, velocidad de carga garantizada, y panel administrador si lo necesitas. Perfecta para empresas, profesionales y marcas que quieren una presencia web seria.",
+      },
+      {
+        h2: "Tienda online / E-commerce: desde US$1,500",
+        p: "Una tienda virtual con catálogo de productos, carrito de compras, pasarela de pago integrada (Azul, CardNet, PayPal), panel de administración, y gestión de inventario. Ideal para negocios en RD que quieren vender por internet.",
+      },
+      {
+        h2: "Sistema de gestión / Aplicación web: desde US$2,000",
+        p: "Sistemas a medida: POS para restaurantes, control de inventario, facturación electrónica DGII, dashboards administrativos, sistemas de reservas. El precio depende de la complejidad, pero siempre te doy un presupuesto claro antes de empezar.",
+      },
+      {
+        h2: "¿Qué incluye el precio?",
+        p: "Todos mis proyectos incluyen: diseño responsivo, optimización SEO, Core Web Vitals optimizados, hosting en Vercel (rápido y seguro), dominio .com o .do, formulario de contacto, integración con WhatsApp, y código limpio y documentado. No hay costos ocultos.",
+      },
+      {
+        h2: "¿Vale la pena invertir en una página web profesional?",
+        p: "Una página web profesional es la herramienta de ventas que trabaja para ti 24/7. En República Dominicana, cada vez más personas buscan servicios y productos por internet antes de comprar. Si tu negocio no aparece en Google, estás perdiendo clientes. Una página web bien hecha se paga sola con los clientes que atrae.",
+      },
+    ],
+    cta: "¿Quieres un presupuesto para tu página web? Escríbeme por WhatsApp y conversemos sin compromiso.",
+    keywords: "cuánto cuesta una página web en RD, precios páginas web República Dominicana, landing page precio RD, página web corporativa costo, desarrollo web RD costos",
+  },
+  en: {
+    title: "How much does a website cost in Dominican Republic? | Guide 2026",
+    description: "Complete pricing guide for websites in DR. How much does a landing page, corporate site, or management system cost? Updated 2026 prices.",
+    h1: "How much does a website cost in Dominican Republic?",
+    date: "June 19, 2026",
+    sections: [
+      {
+        h2: "Why prices vary",
+        p: "Website prices in DR range from $300 to $5,000+. The difference depends on the type of site, features, design, and customization level.",
+      },
+      {
+        h2: "Landing Page: from $300",
+        p: "A single-page site designed to convert visitors into customers. Responsive design, SEO optimization, contact form, WhatsApp integration. Delivered in 5–7 days.",
+      },
+      {
+        h2: "Corporate website: $600–$1,200",
+        p: "Multi-page professional site with custom design, full SEO optimization, fast loading, and admin panel if needed.",
+      },
+      {
+        h2: "E-commerce: from $1,500",
+        p: "Online store with product catalog, shopping cart, payment gateway (Azul, CardNet, PayPal), admin panel, inventory management.",
+      },
+      {
+        h2: "Custom software: from $2,000",
+        p: "POS systems, inventory control, DGII electronic billing, admin dashboards, booking systems. Clear pricing before starting.",
+      },
+    ],
+    cta: "Want a quote for your website? Reach out and let's talk.",
+    keywords: "website cost Dominican Republic, landing page price DR, corporate website pricing, web development DR cost",
+  },
+}[lang];
+---
+
+<Layout title={data.title} description={data.description} lang={lang}>
+  <main class="content-page">
+    <article class="container">
+      <time class="post-date">{data.date}</time>
+      <h1>{data.h1}</h1>
+      {data.sections.map((s) => (
+        <section>
+          <h2>{s.h2}</h2>
+          <p>{s.p}</p>
+        </section>
+      ))}
+      <div class="content-cta">
+        <a href={`/${lang}/#contact`} class="btn-primary">{lang === "es" ? "¿Quieres un presupuesto? →" : "Get a quote →"}</a>
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  body { background: var(--surface); }
+  .content-page { padding: 8rem 1.5rem 5rem; background: var(--surface); min-height: 100vh; }
+  article { max-width: 720px; margin: 0 auto; }
+  .post-date { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-3); }
+  h1 { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.03em; margin: 1rem 0 2rem; color: var(--fg); }
+  section { margin-bottom: 2.5rem; }
+  h2 { font-size: 1.3rem; font-weight: 700; color: var(--fg); margin-bottom: 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.85; color: var(--fg-2); }
+  .content-cta { margin-top: 3rem; }
+</style>

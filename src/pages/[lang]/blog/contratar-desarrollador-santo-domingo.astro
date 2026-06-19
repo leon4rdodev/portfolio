@@ -1,0 +1,101 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { languages, type Lang } from "../../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const data = {
+  es: {
+    title: "Cómo contratar un desarrollador web en Santo Domingo | Guía 2026",
+    description: "Guía práctica para contratar al mejor desarrollador web en Santo Domingo, RD. Qué preguntar, cuánto cuesta, tecnologías, y cómo evitar errores al elegir un programador web.",
+    h1: "Cómo contratar un desarrollador web en Santo Domingo",
+    date: "19 junio, 2026",
+    sections: [
+      {
+        h2: "¿Desarrollador freelance o agencia?",
+        p: "En Santo Domingo hay muchas opciones: agencias de diseño web, desarrolladores freelance, y estudios digitales. Un desarrollador freelance suele ser más económico y flexible, y trabajas directo con quien escribe el código. Una agencia ofrece un equipo completo pero a un costo mayor. Para proyectos pequeños o medianos, un buen freelance es más que suficiente.",
+      },
+      {
+        h2: "¿Qué tecnologías debería usar?",
+        p: "Evita tecnologías obsoletas. Un desarrollador moderno debería trabajar con Next.js, Astro, React, Node.js, NestJS o similares. Si te ofrecen WordPress con plantillas para un proyecto serio, piensa si realmente es lo que necesitas. WordPress está bien para blogs simples, pero para un sistema de gestión o una aplicación web, necesitas algo más robusto.",
+      },
+      {
+        h2: "¿Qué preguntar antes de contratar?",
+        p: "Pregunta por proyectos anteriores similares al tuyo. Pide ver el código (si es público en GitHub). Pregunta por su stack tecnológico, tiempos de entrega, y cómo maneja el soporte post-entrega. Un buen desarrollador te dará respuestas claras y te mostrará trabajo real, no solo capturas de pantalla.",
+      },
+      {
+        h2: "¿Cuánto cuesta contratar un desarrollador web en Santo Domingo?",
+        p: "Las tarifas varían. Un desarrollador freelance junior en Santo Domingo puede cobrar desde US$15–$25/hora, mientras que uno senior con experiencia puede cobrar US$40–$70/hora. Para proyectos con precio fijo, una landing page puede costar US$300–$600, un sitio corporativo US$600–$1,200, y un sistema de gestión desde US$2,000.",
+      },
+      {
+        h2: "¿Qué esperar del proceso?",
+        p: "Un buen proceso incluye: una reunión inicial para entender tu proyecto, una propuesta con alcance y presupuesto, desarrollo con entregas periódicas, revisión y ajustes, y despliegue a producción. El desarrollador debería mantenerte informado en cada etapa y entregar el código fuente al finalizar.",
+      },
+      {
+        h2: "Señales de alerta",
+        p: "Desconfía si: no tiene portafolio o proyectos visibles, promete resultados irreales en tiempos imposibles, no usa control de versiones (Git), no puede explicar su proceso de trabajo, o te pide el pago completo por adelantado. Un desarrollador serio te genera confianza, no urgencia.",
+      },
+    ],
+    cta: "¿Buscas un desarrollador web en Santo Domingo? Escríbeme y conversemos sobre tu proyecto.",
+    keywords: "contratar desarrollador web Santo Domingo, programador web RD, freelance desarrollo web Santo Domingo, cuánto cuesta un desarrollador web RD",
+  },
+  en: {
+    title: "How to hire a web developer in Santo Domingo | Guide 2026",
+    description: "Practical guide to hiring the best web developer in Santo Domingo, DR. What to ask, how much it costs, technologies, and how to avoid common mistakes.",
+    h1: "How to hire a web developer in Santo Domingo",
+    date: "June 19, 2026",
+    sections: [
+      {
+        h2: "Freelance or agency?",
+        p: "In Santo Domingo you'll find both. A freelance developer is usually more affordable and flexible — you work directly with the person writing the code. An agency offers a full team at a higher cost.",
+      },
+      {
+        h2: "What technologies to look for?",
+        p: "Look for a developer who uses modern tech: Next.js, Astro, React, Node.js, NestJS. If they offer WordPress templates for a serious project, think twice.",
+      },
+      {
+        h2: "How much does it cost?",
+        p: "Junior freelance rates in Santo Domingo: $15–$25/hour. Senior: $40–$70/hour. Fixed-price projects: landing page $300–$600, corporate site $600–$1,200, custom systems from $2,000.",
+      },
+    ],
+    cta: "Need a developer in Santo Domingo? Reach out and let's talk.",
+    keywords: "hire web developer Santo Domingo, freelance developer DR, web developer cost Dominican Republic",
+  },
+}[lang];
+---
+
+<Layout title={data.title} description={data.description} lang={lang}>
+  <main class="content-page">
+    <article class="container">
+      <time class="post-date">{data.date}</time>
+      <h1>{data.h1}</h1>
+      {data.sections.map((s) => (
+        <section>
+          <h2>{s.h2}</h2>
+          <p>{s.p}</p>
+        </section>
+      ))}
+      <div class="content-cta">
+        <a href={`/${lang}/#contact`} class="btn-primary">{lang === "es" ? "¿Buscas un desarrollador? Escríbeme →" : "Looking for a developer? →"}</a>
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  body { background: var(--surface); }
+  .content-page { padding: 8rem 1.5rem 5rem; background: var(--surface); min-height: 100vh; }
+  article { max-width: 720px; margin: 0 auto; }
+  .post-date { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-3); }
+  h1 { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.03em; margin: 1rem 0 2rem; color: var(--fg); }
+  section { margin-bottom: 2.5rem; }
+  h2 { font-size: 1.3rem; font-weight: 700; color: var(--fg); margin-bottom: 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.85; color: var(--fg-2); }
+  .content-cta { margin-top: 3rem; }
+</style>
