@@ -27,11 +27,11 @@ const isHome = Astro.url.pathname === `/${lang}/` || Astro.url.pathname === `/${
       <li><a href={`/${lang}/#projects`}>{t("nav.projects")}</a></li>
       <li><a href={`/${lang}/blog/`}>{t("nav.blog")}</a></li>
       <li><a href={`/${lang}/faq/`}>{t("nav.faq")}</a></li>
-      <li><a href={`/${lang}/#contact`}>{t("nav.contact")}</a></li>
+      <li><a href="https://wa.me/18493997434">{t("nav.contact")}</a></li>
       <li>
         <a href={alternateUrl} class="nav-lang">{alternateLang.toUpperCase()}</a>
       </li>
-      <li><a href={`/${lang}/#contact`} class="nav-cta">{t("nav.cta")}</a></li>
+      <li><a href="https://wa.me/18493997434" class="nav-cta">{t("nav.cta")}</a></li>
     </ul>
 
     <button class="hamburger" id="burger" aria-label="Toggle menu">
@@ -48,7 +48,7 @@ const isHome = Astro.url.pathname === `/${lang}/` || Astro.url.pathname === `/${
     <li><a href={`/${lang}/#projects`}>{t("nav.projects")}</a></li>
     <li><a href={`/${lang}/blog/`}>{t("nav.blog")}</a></li>
     <li><a href={`/${lang}/faq/`}>{t("nav.faq")}</a></li>
-    <li><a href={`/${lang}/#contact`} class="mob-cta">{t("nav.cta")}</a></li>
+    <li><a href="https://wa.me/18493997434" class="mob-cta">{t("nav.cta")}</a></li>
   </ul>
   <div class="mob-footer">
     <a href={alternateUrl}>{alternateLang === "es" ? "🇩🇴 ES" : "🇺🇸 EN"}</a>

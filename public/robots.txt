@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://leon4rdodev.vercel.app/sitemap.xml
+Sitemap: https://leon4rdo.me/sitemap.xml
