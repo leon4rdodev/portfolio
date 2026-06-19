@@ -1,0 +1,8 @@
+# Leon4rdoDev - Portfolio
+
+## About
+Backend developer portfolio by Leonardo, showcasing projects and services in web development.
+
+## Pages
+- /en/ - English portfolio
+- /es/ - Spanish portfolio (Español)
