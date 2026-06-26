@@ -54,9 +54,13 @@
   "projects.visit": "View project ↗",
   "projects.private": "Private",
 
+  "project.goldentouch.name": "GOLDEN TOUCH",
+  "project.goldentouch.description": "A North Carolina cleaning company needed a professional website to attract residential and commercial clients. I built a bilingual (EN/ES) Next.js site with a dynamic quote form, service showcase, before/after gallery, testimonial system, and SEO optimized for local search. Live product generating real leads.",
+  "project.goldentouch.tags": "Next.js,TypeScript,SEO,i18n",
+
   "project.tiksnap.name": "TIKSNAP",
-  "project.tiksnap.description": "Users wanted to download TikTok videos without watermarks, and existing tools were full of ads and sketchy popups. I built a clean SaaS with SSR, an integrated blog to capture organic traffic, and GDPR compliance. Live product with real users who come back.",
-  "project.tiksnap.tags": "Next.js,TypeScript,Puppeteer,SSR",
+  "project.tiksnap.description": "A free open-source tool to download TikTok videos without watermarks — no ads, no shady popups, no signups. Built with Next.js SSR, privacy-focused and GDPR compliant. Used by thousands of people every month.",
+  "project.tiksnap.tags": "Next.js,TypeScript,Open Source,Puppeteer",
 
   "project.tonyranch.name": "TONYRANCH",
   "project.tonyranch.description": "A resort was running reservations, day passes, inventory, and finances on paper and Excel. I built a full operational system: real-time bookings, point of sale, inventory control, and financial reports — all in an installable PWA. The spreadsheets are gone and nobody misses them.",
